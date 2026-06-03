@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Nav } from '@/components/Nav';
+import { RegisterSW } from '@/components/RegisterSW';
 
 export const metadata: Metadata = {
   title: 'VM-tipset 2026',
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
       </head>
       <body>
+        <RegisterSW />
         <div className="max-w-[1080px] mx-auto px-4 py-5 pb-16">
           <Nav />
           {children}
