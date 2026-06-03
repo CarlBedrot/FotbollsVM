@@ -69,3 +69,8 @@ export interface ScoringInput {
   matches: Match[];
   predictions: Prediction[];
 }
+
+/** Per-user submission metadata used as a leaderboard tiebreaker. */
+export interface TieData {
+  submittedAt: number;
+}

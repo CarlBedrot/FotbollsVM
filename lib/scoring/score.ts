@@ -1,5 +1,5 @@
 import type {
-  GroupId, Pick, Prediction, RankedScore, ScoreBreakdown, ScoringInput, UserScore,
+  GroupId, Pick, Prediction, RankedScore, ScoreBreakdown, ScoringInput, TieData, UserScore,
 } from '../domain/types';
 import { RULES, GROUP_IDS } from '../domain/rules';
 import { matchOutcome } from './outcome';
@@ -82,10 +82,6 @@ function scoreUser(
     totalPoints: b.matchPoints + bonusPoints,
     breakdown: b,
   };
-}
-
-export interface TieData {
-  submittedAt: number;
 }
 
 /** Rank by total → exact 1/X/2 count (matchPoints) → earliest submission → userId. */
