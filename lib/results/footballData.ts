@@ -17,11 +17,13 @@ export interface MatchLabels {
 const ALIASES: Record<string, string> = {
   'korea republic': 'south korea',
   'united states': 'usa',
-  'ivory coast': 'ivory coast',
   'cote divoire': 'ivory coast',
+  "cote d'ivoire": 'ivory coast',
   'czechia': 'czech republic',
-  'dr congo': 'dr congo',
   'cape verde islands': 'cape verde',
+  'turkiye': 'turkey',
+  'ir iran': 'iran',
+  'korea dpr': 'north korea',
 };
 
 const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
