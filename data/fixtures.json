@@ -1,0 +1,1392 @@
+{
+  "season": "2026",
+  "firstKickoff": "2026-06-11T19:00:00.000Z",
+  "teams": [
+    {
+      "id": "czech-republic",
+      "name": "Czech Republic",
+      "group": "A"
+    },
+    {
+      "id": "mexico",
+      "name": "Mexico",
+      "group": "A"
+    },
+    {
+      "id": "south-africa",
+      "name": "South Africa",
+      "group": "A"
+    },
+    {
+      "id": "south-korea",
+      "name": "South Korea",
+      "group": "A"
+    },
+    {
+      "id": "bosnia-and-herzegovina",
+      "name": "Bosnia & Herzegovina",
+      "group": "B"
+    },
+    {
+      "id": "canada",
+      "name": "Canada",
+      "group": "B"
+    },
+    {
+      "id": "qatar",
+      "name": "Qatar",
+      "group": "B"
+    },
+    {
+      "id": "switzerland",
+      "name": "Switzerland",
+      "group": "B"
+    },
+    {
+      "id": "brazil",
+      "name": "Brazil",
+      "group": "C"
+    },
+    {
+      "id": "haiti",
+      "name": "Haiti",
+      "group": "C"
+    },
+    {
+      "id": "morocco",
+      "name": "Morocco",
+      "group": "C"
+    },
+    {
+      "id": "scotland",
+      "name": "Scotland",
+      "group": "C"
+    },
+    {
+      "id": "australia",
+      "name": "Australia",
+      "group": "D"
+    },
+    {
+      "id": "paraguay",
+      "name": "Paraguay",
+      "group": "D"
+    },
+    {
+      "id": "turkey",
+      "name": "Turkey",
+      "group": "D"
+    },
+    {
+      "id": "usa",
+      "name": "USA",
+      "group": "D"
+    },
+    {
+      "id": "curacao",
+      "name": "Curaçao",
+      "group": "E"
+    },
+    {
+      "id": "ecuador",
+      "name": "Ecuador",
+      "group": "E"
+    },
+    {
+      "id": "germany",
+      "name": "Germany",
+      "group": "E"
+    },
+    {
+      "id": "ivory-coast",
+      "name": "Ivory Coast",
+      "group": "E"
+    },
+    {
+      "id": "japan",
+      "name": "Japan",
+      "group": "F"
+    },
+    {
+      "id": "netherlands",
+      "name": "Netherlands",
+      "group": "F"
+    },
+    {
+      "id": "sweden",
+      "name": "Sweden",
+      "group": "F"
+    },
+    {
+      "id": "tunisia",
+      "name": "Tunisia",
+      "group": "F"
+    },
+    {
+      "id": "belgium",
+      "name": "Belgium",
+      "group": "G"
+    },
+    {
+      "id": "egypt",
+      "name": "Egypt",
+      "group": "G"
+    },
+    {
+      "id": "iran",
+      "name": "Iran",
+      "group": "G"
+    },
+    {
+      "id": "new-zealand",
+      "name": "New Zealand",
+      "group": "G"
+    },
+    {
+      "id": "cape-verde",
+      "name": "Cape Verde",
+      "group": "H"
+    },
+    {
+      "id": "saudi-arabia",
+      "name": "Saudi Arabia",
+      "group": "H"
+    },
+    {
+      "id": "spain",
+      "name": "Spain",
+      "group": "H"
+    },
+    {
+      "id": "uruguay",
+      "name": "Uruguay",
+      "group": "H"
+    },
+    {
+      "id": "france",
+      "name": "France",
+      "group": "I"
+    },
+    {
+      "id": "iraq",
+      "name": "Iraq",
+      "group": "I"
+    },
+    {
+      "id": "norway",
+      "name": "Norway",
+      "group": "I"
+    },
+    {
+      "id": "senegal",
+      "name": "Senegal",
+      "group": "I"
+    },
+    {
+      "id": "algeria",
+      "name": "Algeria",
+      "group": "J"
+    },
+    {
+      "id": "argentina",
+      "name": "Argentina",
+      "group": "J"
+    },
+    {
+      "id": "austria",
+      "name": "Austria",
+      "group": "J"
+    },
+    {
+      "id": "jordan",
+      "name": "Jordan",
+      "group": "J"
+    },
+    {
+      "id": "colombia",
+      "name": "Colombia",
+      "group": "K"
+    },
+    {
+      "id": "dr-congo",
+      "name": "DR Congo",
+      "group": "K"
+    },
+    {
+      "id": "portugal",
+      "name": "Portugal",
+      "group": "K"
+    },
+    {
+      "id": "uzbekistan",
+      "name": "Uzbekistan",
+      "group": "K"
+    },
+    {
+      "id": "croatia",
+      "name": "Croatia",
+      "group": "L"
+    },
+    {
+      "id": "england",
+      "name": "England",
+      "group": "L"
+    },
+    {
+      "id": "ghana",
+      "name": "Ghana",
+      "group": "L"
+    },
+    {
+      "id": "panama",
+      "name": "Panama",
+      "group": "L"
+    }
+  ],
+  "matches": [
+    {
+      "id": "G001",
+      "stage": "group",
+      "group": "A",
+      "homeTeamId": "mexico",
+      "awayTeamId": "south-africa",
+      "homeLabel": "Mexico",
+      "awayLabel": "South Africa",
+      "kickoff": "2026-06-11T19:00:00.000Z",
+      "ground": "Mexico City"
+    },
+    {
+      "id": "G002",
+      "stage": "group",
+      "group": "A",
+      "homeTeamId": "south-korea",
+      "awayTeamId": "czech-republic",
+      "homeLabel": "South Korea",
+      "awayLabel": "Czech Republic",
+      "kickoff": "2026-06-12T02:00:00.000Z",
+      "ground": "Guadalajara (Zapopan)"
+    },
+    {
+      "id": "G003",
+      "stage": "group",
+      "group": "A",
+      "homeTeamId": "czech-republic",
+      "awayTeamId": "south-africa",
+      "homeLabel": "Czech Republic",
+      "awayLabel": "South Africa",
+      "kickoff": "2026-06-18T16:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "G004",
+      "stage": "group",
+      "group": "A",
+      "homeTeamId": "mexico",
+      "awayTeamId": "south-korea",
+      "homeLabel": "Mexico",
+      "awayLabel": "South Korea",
+      "kickoff": "2026-06-19T01:00:00.000Z",
+      "ground": "Guadalajara (Zapopan)"
+    },
+    {
+      "id": "G005",
+      "stage": "group",
+      "group": "A",
+      "homeTeamId": "czech-republic",
+      "awayTeamId": "mexico",
+      "homeLabel": "Czech Republic",
+      "awayLabel": "Mexico",
+      "kickoff": "2026-06-25T01:00:00.000Z",
+      "ground": "Mexico City"
+    },
+    {
+      "id": "G006",
+      "stage": "group",
+      "group": "A",
+      "homeTeamId": "south-africa",
+      "awayTeamId": "south-korea",
+      "homeLabel": "South Africa",
+      "awayLabel": "South Korea",
+      "kickoff": "2026-06-25T01:00:00.000Z",
+      "ground": "Monterrey (Guadalupe)"
+    },
+    {
+      "id": "G007",
+      "stage": "group",
+      "group": "B",
+      "homeTeamId": "canada",
+      "awayTeamId": "bosnia-and-herzegovina",
+      "homeLabel": "Canada",
+      "awayLabel": "Bosnia & Herzegovina",
+      "kickoff": "2026-06-12T19:00:00.000Z",
+      "ground": "Toronto"
+    },
+    {
+      "id": "G008",
+      "stage": "group",
+      "group": "B",
+      "homeTeamId": "qatar",
+      "awayTeamId": "switzerland",
+      "homeLabel": "Qatar",
+      "awayLabel": "Switzerland",
+      "kickoff": "2026-06-13T19:00:00.000Z",
+      "ground": "San Francisco Bay Area (Santa Clara)"
+    },
+    {
+      "id": "G009",
+      "stage": "group",
+      "group": "B",
+      "homeTeamId": "switzerland",
+      "awayTeamId": "bosnia-and-herzegovina",
+      "homeLabel": "Switzerland",
+      "awayLabel": "Bosnia & Herzegovina",
+      "kickoff": "2026-06-18T19:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "G010",
+      "stage": "group",
+      "group": "B",
+      "homeTeamId": "canada",
+      "awayTeamId": "qatar",
+      "homeLabel": "Canada",
+      "awayLabel": "Qatar",
+      "kickoff": "2026-06-18T22:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "G011",
+      "stage": "group",
+      "group": "B",
+      "homeTeamId": "switzerland",
+      "awayTeamId": "canada",
+      "homeLabel": "Switzerland",
+      "awayLabel": "Canada",
+      "kickoff": "2026-06-24T19:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "G012",
+      "stage": "group",
+      "group": "B",
+      "homeTeamId": "bosnia-and-herzegovina",
+      "awayTeamId": "qatar",
+      "homeLabel": "Bosnia & Herzegovina",
+      "awayLabel": "Qatar",
+      "kickoff": "2026-06-24T19:00:00.000Z",
+      "ground": "Seattle"
+    },
+    {
+      "id": "G013",
+      "stage": "group",
+      "group": "C",
+      "homeTeamId": "brazil",
+      "awayTeamId": "morocco",
+      "homeLabel": "Brazil",
+      "awayLabel": "Morocco",
+      "kickoff": "2026-06-13T22:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "G014",
+      "stage": "group",
+      "group": "C",
+      "homeTeamId": "haiti",
+      "awayTeamId": "scotland",
+      "homeLabel": "Haiti",
+      "awayLabel": "Scotland",
+      "kickoff": "2026-06-14T01:00:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "G015",
+      "stage": "group",
+      "group": "C",
+      "homeTeamId": "scotland",
+      "awayTeamId": "morocco",
+      "homeLabel": "Scotland",
+      "awayLabel": "Morocco",
+      "kickoff": "2026-06-19T22:00:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "G016",
+      "stage": "group",
+      "group": "C",
+      "homeTeamId": "brazil",
+      "awayTeamId": "haiti",
+      "homeLabel": "Brazil",
+      "awayLabel": "Haiti",
+      "kickoff": "2026-06-20T00:30:00.000Z",
+      "ground": "Philadelphia"
+    },
+    {
+      "id": "G017",
+      "stage": "group",
+      "group": "C",
+      "homeTeamId": "scotland",
+      "awayTeamId": "brazil",
+      "homeLabel": "Scotland",
+      "awayLabel": "Brazil",
+      "kickoff": "2026-06-24T22:00:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "G018",
+      "stage": "group",
+      "group": "C",
+      "homeTeamId": "morocco",
+      "awayTeamId": "haiti",
+      "homeLabel": "Morocco",
+      "awayLabel": "Haiti",
+      "kickoff": "2026-06-24T22:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "G019",
+      "stage": "group",
+      "group": "D",
+      "homeTeamId": "usa",
+      "awayTeamId": "paraguay",
+      "homeLabel": "USA",
+      "awayLabel": "Paraguay",
+      "kickoff": "2026-06-13T01:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "G020",
+      "stage": "group",
+      "group": "D",
+      "homeTeamId": "australia",
+      "awayTeamId": "turkey",
+      "homeLabel": "Australia",
+      "awayLabel": "Turkey",
+      "kickoff": "2026-06-14T04:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "G021",
+      "stage": "group",
+      "group": "D",
+      "homeTeamId": "usa",
+      "awayTeamId": "australia",
+      "homeLabel": "USA",
+      "awayLabel": "Australia",
+      "kickoff": "2026-06-19T19:00:00.000Z",
+      "ground": "Seattle"
+    },
+    {
+      "id": "G022",
+      "stage": "group",
+      "group": "D",
+      "homeTeamId": "turkey",
+      "awayTeamId": "paraguay",
+      "homeLabel": "Turkey",
+      "awayLabel": "Paraguay",
+      "kickoff": "2026-06-20T03:00:00.000Z",
+      "ground": "San Francisco Bay Area (Santa Clara)"
+    },
+    {
+      "id": "G023",
+      "stage": "group",
+      "group": "D",
+      "homeTeamId": "turkey",
+      "awayTeamId": "usa",
+      "homeLabel": "Turkey",
+      "awayLabel": "USA",
+      "kickoff": "2026-06-26T02:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "G024",
+      "stage": "group",
+      "group": "D",
+      "homeTeamId": "paraguay",
+      "awayTeamId": "australia",
+      "homeLabel": "Paraguay",
+      "awayLabel": "Australia",
+      "kickoff": "2026-06-26T02:00:00.000Z",
+      "ground": "San Francisco Bay Area (Santa Clara)"
+    },
+    {
+      "id": "G025",
+      "stage": "group",
+      "group": "E",
+      "homeTeamId": "germany",
+      "awayTeamId": "curacao",
+      "homeLabel": "Germany",
+      "awayLabel": "Curaçao",
+      "kickoff": "2026-06-14T17:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "G026",
+      "stage": "group",
+      "group": "E",
+      "homeTeamId": "ivory-coast",
+      "awayTeamId": "ecuador",
+      "homeLabel": "Ivory Coast",
+      "awayLabel": "Ecuador",
+      "kickoff": "2026-06-14T23:00:00.000Z",
+      "ground": "Philadelphia"
+    },
+    {
+      "id": "G027",
+      "stage": "group",
+      "group": "E",
+      "homeTeamId": "germany",
+      "awayTeamId": "ivory-coast",
+      "homeLabel": "Germany",
+      "awayLabel": "Ivory Coast",
+      "kickoff": "2026-06-20T20:00:00.000Z",
+      "ground": "Toronto"
+    },
+    {
+      "id": "G028",
+      "stage": "group",
+      "group": "E",
+      "homeTeamId": "ecuador",
+      "awayTeamId": "curacao",
+      "homeLabel": "Ecuador",
+      "awayLabel": "Curaçao",
+      "kickoff": "2026-06-21T00:00:00.000Z",
+      "ground": "Kansas City"
+    },
+    {
+      "id": "G029",
+      "stage": "group",
+      "group": "E",
+      "homeTeamId": "curacao",
+      "awayTeamId": "ivory-coast",
+      "homeLabel": "Curaçao",
+      "awayLabel": "Ivory Coast",
+      "kickoff": "2026-06-25T20:00:00.000Z",
+      "ground": "Philadelphia"
+    },
+    {
+      "id": "G030",
+      "stage": "group",
+      "group": "E",
+      "homeTeamId": "ecuador",
+      "awayTeamId": "germany",
+      "homeLabel": "Ecuador",
+      "awayLabel": "Germany",
+      "kickoff": "2026-06-25T20:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "G031",
+      "stage": "group",
+      "group": "F",
+      "homeTeamId": "netherlands",
+      "awayTeamId": "japan",
+      "homeLabel": "Netherlands",
+      "awayLabel": "Japan",
+      "kickoff": "2026-06-14T20:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "G032",
+      "stage": "group",
+      "group": "F",
+      "homeTeamId": "sweden",
+      "awayTeamId": "tunisia",
+      "homeLabel": "Sweden",
+      "awayLabel": "Tunisia",
+      "kickoff": "2026-06-15T02:00:00.000Z",
+      "ground": "Monterrey (Guadalupe)"
+    },
+    {
+      "id": "G033",
+      "stage": "group",
+      "group": "F",
+      "homeTeamId": "netherlands",
+      "awayTeamId": "sweden",
+      "homeLabel": "Netherlands",
+      "awayLabel": "Sweden",
+      "kickoff": "2026-06-20T17:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "G034",
+      "stage": "group",
+      "group": "F",
+      "homeTeamId": "tunisia",
+      "awayTeamId": "japan",
+      "homeLabel": "Tunisia",
+      "awayLabel": "Japan",
+      "kickoff": "2026-06-21T04:00:00.000Z",
+      "ground": "Monterrey (Guadalupe)"
+    },
+    {
+      "id": "G035",
+      "stage": "group",
+      "group": "F",
+      "homeTeamId": "japan",
+      "awayTeamId": "sweden",
+      "homeLabel": "Japan",
+      "awayLabel": "Sweden",
+      "kickoff": "2026-06-25T23:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "G036",
+      "stage": "group",
+      "group": "F",
+      "homeTeamId": "tunisia",
+      "awayTeamId": "netherlands",
+      "homeLabel": "Tunisia",
+      "awayLabel": "Netherlands",
+      "kickoff": "2026-06-25T23:00:00.000Z",
+      "ground": "Kansas City"
+    },
+    {
+      "id": "G037",
+      "stage": "group",
+      "group": "G",
+      "homeTeamId": "belgium",
+      "awayTeamId": "egypt",
+      "homeLabel": "Belgium",
+      "awayLabel": "Egypt",
+      "kickoff": "2026-06-15T19:00:00.000Z",
+      "ground": "Seattle"
+    },
+    {
+      "id": "G038",
+      "stage": "group",
+      "group": "G",
+      "homeTeamId": "iran",
+      "awayTeamId": "new-zealand",
+      "homeLabel": "Iran",
+      "awayLabel": "New Zealand",
+      "kickoff": "2026-06-16T01:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "G039",
+      "stage": "group",
+      "group": "G",
+      "homeTeamId": "belgium",
+      "awayTeamId": "iran",
+      "homeLabel": "Belgium",
+      "awayLabel": "Iran",
+      "kickoff": "2026-06-21T19:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "G040",
+      "stage": "group",
+      "group": "G",
+      "homeTeamId": "new-zealand",
+      "awayTeamId": "egypt",
+      "homeLabel": "New Zealand",
+      "awayLabel": "Egypt",
+      "kickoff": "2026-06-22T01:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "G041",
+      "stage": "group",
+      "group": "G",
+      "homeTeamId": "egypt",
+      "awayTeamId": "iran",
+      "homeLabel": "Egypt",
+      "awayLabel": "Iran",
+      "kickoff": "2026-06-27T03:00:00.000Z",
+      "ground": "Seattle"
+    },
+    {
+      "id": "G042",
+      "stage": "group",
+      "group": "G",
+      "homeTeamId": "new-zealand",
+      "awayTeamId": "belgium",
+      "homeLabel": "New Zealand",
+      "awayLabel": "Belgium",
+      "kickoff": "2026-06-27T03:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "G043",
+      "stage": "group",
+      "group": "H",
+      "homeTeamId": "spain",
+      "awayTeamId": "cape-verde",
+      "homeLabel": "Spain",
+      "awayLabel": "Cape Verde",
+      "kickoff": "2026-06-15T16:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "G044",
+      "stage": "group",
+      "group": "H",
+      "homeTeamId": "saudi-arabia",
+      "awayTeamId": "uruguay",
+      "homeLabel": "Saudi Arabia",
+      "awayLabel": "Uruguay",
+      "kickoff": "2026-06-15T22:00:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "G045",
+      "stage": "group",
+      "group": "H",
+      "homeTeamId": "spain",
+      "awayTeamId": "saudi-arabia",
+      "homeLabel": "Spain",
+      "awayLabel": "Saudi Arabia",
+      "kickoff": "2026-06-21T16:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "G046",
+      "stage": "group",
+      "group": "H",
+      "homeTeamId": "uruguay",
+      "awayTeamId": "cape-verde",
+      "homeLabel": "Uruguay",
+      "awayLabel": "Cape Verde",
+      "kickoff": "2026-06-21T22:00:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "G047",
+      "stage": "group",
+      "group": "H",
+      "homeTeamId": "cape-verde",
+      "awayTeamId": "saudi-arabia",
+      "homeLabel": "Cape Verde",
+      "awayLabel": "Saudi Arabia",
+      "kickoff": "2026-06-27T00:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "G048",
+      "stage": "group",
+      "group": "H",
+      "homeTeamId": "uruguay",
+      "awayTeamId": "spain",
+      "homeLabel": "Uruguay",
+      "awayLabel": "Spain",
+      "kickoff": "2026-06-27T00:00:00.000Z",
+      "ground": "Guadalajara (Zapopan)"
+    },
+    {
+      "id": "G049",
+      "stage": "group",
+      "group": "I",
+      "homeTeamId": "france",
+      "awayTeamId": "senegal",
+      "homeLabel": "France",
+      "awayLabel": "Senegal",
+      "kickoff": "2026-06-16T19:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "G050",
+      "stage": "group",
+      "group": "I",
+      "homeTeamId": "iraq",
+      "awayTeamId": "norway",
+      "homeLabel": "Iraq",
+      "awayLabel": "Norway",
+      "kickoff": "2026-06-16T22:00:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "G051",
+      "stage": "group",
+      "group": "I",
+      "homeTeamId": "france",
+      "awayTeamId": "iraq",
+      "homeLabel": "France",
+      "awayLabel": "Iraq",
+      "kickoff": "2026-06-22T21:00:00.000Z",
+      "ground": "Philadelphia"
+    },
+    {
+      "id": "G052",
+      "stage": "group",
+      "group": "I",
+      "homeTeamId": "norway",
+      "awayTeamId": "senegal",
+      "homeLabel": "Norway",
+      "awayLabel": "Senegal",
+      "kickoff": "2026-06-23T00:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "G053",
+      "stage": "group",
+      "group": "I",
+      "homeTeamId": "norway",
+      "awayTeamId": "france",
+      "homeLabel": "Norway",
+      "awayLabel": "France",
+      "kickoff": "2026-06-26T19:00:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "G054",
+      "stage": "group",
+      "group": "I",
+      "homeTeamId": "senegal",
+      "awayTeamId": "iraq",
+      "homeLabel": "Senegal",
+      "awayLabel": "Iraq",
+      "kickoff": "2026-06-26T19:00:00.000Z",
+      "ground": "Toronto"
+    },
+    {
+      "id": "G055",
+      "stage": "group",
+      "group": "J",
+      "homeTeamId": "argentina",
+      "awayTeamId": "algeria",
+      "homeLabel": "Argentina",
+      "awayLabel": "Algeria",
+      "kickoff": "2026-06-17T01:00:00.000Z",
+      "ground": "Kansas City"
+    },
+    {
+      "id": "G056",
+      "stage": "group",
+      "group": "J",
+      "homeTeamId": "austria",
+      "awayTeamId": "jordan",
+      "homeLabel": "Austria",
+      "awayLabel": "Jordan",
+      "kickoff": "2026-06-17T04:00:00.000Z",
+      "ground": "San Francisco Bay Area (Santa Clara)"
+    },
+    {
+      "id": "G057",
+      "stage": "group",
+      "group": "J",
+      "homeTeamId": "argentina",
+      "awayTeamId": "austria",
+      "homeLabel": "Argentina",
+      "awayLabel": "Austria",
+      "kickoff": "2026-06-22T17:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "G058",
+      "stage": "group",
+      "group": "J",
+      "homeTeamId": "jordan",
+      "awayTeamId": "algeria",
+      "homeLabel": "Jordan",
+      "awayLabel": "Algeria",
+      "kickoff": "2026-06-23T03:00:00.000Z",
+      "ground": "San Francisco Bay Area (Santa Clara)"
+    },
+    {
+      "id": "G059",
+      "stage": "group",
+      "group": "J",
+      "homeTeamId": "algeria",
+      "awayTeamId": "austria",
+      "homeLabel": "Algeria",
+      "awayLabel": "Austria",
+      "kickoff": "2026-06-28T02:00:00.000Z",
+      "ground": "Kansas City"
+    },
+    {
+      "id": "G060",
+      "stage": "group",
+      "group": "J",
+      "homeTeamId": "jordan",
+      "awayTeamId": "argentina",
+      "homeLabel": "Jordan",
+      "awayLabel": "Argentina",
+      "kickoff": "2026-06-28T02:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "G061",
+      "stage": "group",
+      "group": "K",
+      "homeTeamId": "portugal",
+      "awayTeamId": "dr-congo",
+      "homeLabel": "Portugal",
+      "awayLabel": "DR Congo",
+      "kickoff": "2026-06-17T17:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "G062",
+      "stage": "group",
+      "group": "K",
+      "homeTeamId": "uzbekistan",
+      "awayTeamId": "colombia",
+      "homeLabel": "Uzbekistan",
+      "awayLabel": "Colombia",
+      "kickoff": "2026-06-18T02:00:00.000Z",
+      "ground": "Mexico City"
+    },
+    {
+      "id": "G063",
+      "stage": "group",
+      "group": "K",
+      "homeTeamId": "portugal",
+      "awayTeamId": "uzbekistan",
+      "homeLabel": "Portugal",
+      "awayLabel": "Uzbekistan",
+      "kickoff": "2026-06-23T17:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "G064",
+      "stage": "group",
+      "group": "K",
+      "homeTeamId": "colombia",
+      "awayTeamId": "dr-congo",
+      "homeLabel": "Colombia",
+      "awayLabel": "DR Congo",
+      "kickoff": "2026-06-24T02:00:00.000Z",
+      "ground": "Guadalajara (Zapopan)"
+    },
+    {
+      "id": "G065",
+      "stage": "group",
+      "group": "K",
+      "homeTeamId": "colombia",
+      "awayTeamId": "portugal",
+      "homeLabel": "Colombia",
+      "awayLabel": "Portugal",
+      "kickoff": "2026-06-27T23:30:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "G066",
+      "stage": "group",
+      "group": "K",
+      "homeTeamId": "dr-congo",
+      "awayTeamId": "uzbekistan",
+      "homeLabel": "DR Congo",
+      "awayLabel": "Uzbekistan",
+      "kickoff": "2026-06-27T23:30:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "G067",
+      "stage": "group",
+      "group": "L",
+      "homeTeamId": "england",
+      "awayTeamId": "croatia",
+      "homeLabel": "England",
+      "awayLabel": "Croatia",
+      "kickoff": "2026-06-17T20:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "G068",
+      "stage": "group",
+      "group": "L",
+      "homeTeamId": "ghana",
+      "awayTeamId": "panama",
+      "homeLabel": "Ghana",
+      "awayLabel": "Panama",
+      "kickoff": "2026-06-17T23:00:00.000Z",
+      "ground": "Toronto"
+    },
+    {
+      "id": "G069",
+      "stage": "group",
+      "group": "L",
+      "homeTeamId": "england",
+      "awayTeamId": "ghana",
+      "homeLabel": "England",
+      "awayLabel": "Ghana",
+      "kickoff": "2026-06-23T20:00:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "G070",
+      "stage": "group",
+      "group": "L",
+      "homeTeamId": "panama",
+      "awayTeamId": "croatia",
+      "homeLabel": "Panama",
+      "awayLabel": "Croatia",
+      "kickoff": "2026-06-23T23:00:00.000Z",
+      "ground": "Toronto"
+    },
+    {
+      "id": "G071",
+      "stage": "group",
+      "group": "L",
+      "homeTeamId": "panama",
+      "awayTeamId": "england",
+      "homeLabel": "Panama",
+      "awayLabel": "England",
+      "kickoff": "2026-06-27T21:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "G072",
+      "stage": "group",
+      "group": "L",
+      "homeTeamId": "croatia",
+      "awayTeamId": "ghana",
+      "homeLabel": "Croatia",
+      "awayLabel": "Ghana",
+      "kickoff": "2026-06-27T21:00:00.000Z",
+      "ground": "Philadelphia"
+    },
+    {
+      "id": "K73",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "2A",
+      "awayLabel": "2B",
+      "kickoff": "2026-06-28T19:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "K74",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1E",
+      "awayLabel": "3A/B/C/D/F",
+      "kickoff": "2026-06-29T20:30:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "K75",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1F",
+      "awayLabel": "2C",
+      "kickoff": "2026-06-30T01:00:00.000Z",
+      "ground": "Monterrey (Guadalupe)"
+    },
+    {
+      "id": "K76",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1C",
+      "awayLabel": "2F",
+      "kickoff": "2026-06-29T17:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "K77",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1I",
+      "awayLabel": "3C/D/F/G/H",
+      "kickoff": "2026-06-30T21:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "K78",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "2E",
+      "awayLabel": "2I",
+      "kickoff": "2026-06-30T17:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "K79",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1A",
+      "awayLabel": "3C/E/F/H/I",
+      "kickoff": "2026-07-01T01:00:00.000Z",
+      "ground": "Mexico City"
+    },
+    {
+      "id": "K80",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1L",
+      "awayLabel": "3E/H/I/J/K",
+      "kickoff": "2026-07-01T16:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "K81",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1D",
+      "awayLabel": "3B/E/F/I/J",
+      "kickoff": "2026-07-02T00:00:00.000Z",
+      "ground": "San Francisco Bay Area (Santa Clara)"
+    },
+    {
+      "id": "K82",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1G",
+      "awayLabel": "3A/E/H/I/J",
+      "kickoff": "2026-07-01T20:00:00.000Z",
+      "ground": "Seattle"
+    },
+    {
+      "id": "K83",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "2K",
+      "awayLabel": "2L",
+      "kickoff": "2026-07-02T23:00:00.000Z",
+      "ground": "Toronto"
+    },
+    {
+      "id": "K84",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1H",
+      "awayLabel": "2J",
+      "kickoff": "2026-07-02T19:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "K85",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1B",
+      "awayLabel": "3E/F/G/I/J",
+      "kickoff": "2026-07-03T03:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "K86",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1J",
+      "awayLabel": "2H",
+      "kickoff": "2026-07-03T22:00:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "K87",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "1K",
+      "awayLabel": "3D/E/I/J/L",
+      "kickoff": "2026-07-04T01:30:00.000Z",
+      "ground": "Kansas City"
+    },
+    {
+      "id": "K88",
+      "stage": "r32",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "2D",
+      "awayLabel": "2G",
+      "kickoff": "2026-07-03T18:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "K89",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W74",
+      "awayLabel": "W77",
+      "kickoff": "2026-07-04T21:00:00.000Z",
+      "ground": "Philadelphia"
+    },
+    {
+      "id": "K90",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W73",
+      "awayLabel": "W75",
+      "kickoff": "2026-07-04T17:00:00.000Z",
+      "ground": "Houston"
+    },
+    {
+      "id": "K91",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W76",
+      "awayLabel": "W78",
+      "kickoff": "2026-07-05T20:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    },
+    {
+      "id": "K92",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W79",
+      "awayLabel": "W80",
+      "kickoff": "2026-07-06T00:00:00.000Z",
+      "ground": "Mexico City"
+    },
+    {
+      "id": "K93",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W83",
+      "awayLabel": "W84",
+      "kickoff": "2026-07-06T19:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "K94",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W81",
+      "awayLabel": "W82",
+      "kickoff": "2026-07-07T00:00:00.000Z",
+      "ground": "Seattle"
+    },
+    {
+      "id": "K95",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W86",
+      "awayLabel": "W88",
+      "kickoff": "2026-07-07T16:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "K96",
+      "stage": "r16",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W85",
+      "awayLabel": "W87",
+      "kickoff": "2026-07-07T20:00:00.000Z",
+      "ground": "Vancouver"
+    },
+    {
+      "id": "K97",
+      "stage": "qf",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W89",
+      "awayLabel": "W90",
+      "kickoff": "2026-07-09T20:00:00.000Z",
+      "ground": "Boston (Foxborough)"
+    },
+    {
+      "id": "K98",
+      "stage": "qf",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W93",
+      "awayLabel": "W94",
+      "kickoff": "2026-07-10T19:00:00.000Z",
+      "ground": "Los Angeles (Inglewood)"
+    },
+    {
+      "id": "K99",
+      "stage": "qf",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W91",
+      "awayLabel": "W92",
+      "kickoff": "2026-07-11T21:00:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "K100",
+      "stage": "qf",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W95",
+      "awayLabel": "W96",
+      "kickoff": "2026-07-12T01:00:00.000Z",
+      "ground": "Kansas City"
+    },
+    {
+      "id": "K101",
+      "stage": "sf",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W97",
+      "awayLabel": "W98",
+      "kickoff": "2026-07-14T19:00:00.000Z",
+      "ground": "Dallas (Arlington)"
+    },
+    {
+      "id": "K102",
+      "stage": "sf",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W99",
+      "awayLabel": "W100",
+      "kickoff": "2026-07-15T19:00:00.000Z",
+      "ground": "Atlanta"
+    },
+    {
+      "id": "K_31",
+      "stage": "bronze",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "L101",
+      "awayLabel": "L102",
+      "kickoff": "2026-07-18T21:00:00.000Z",
+      "ground": "Miami (Miami Gardens)"
+    },
+    {
+      "id": "K_32",
+      "stage": "final",
+      "group": null,
+      "homeTeamId": null,
+      "awayTeamId": null,
+      "homeLabel": "W101",
+      "awayLabel": "W102",
+      "kickoff": "2026-07-19T19:00:00.000Z",
+      "ground": "New York/New Jersey (East Rutherford)"
+    }
+  ]
+}
