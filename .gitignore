@@ -1,0 +1,19 @@
+# Brainstorm visual-companion sessions (local only)
+.superpowers/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Env & secrets
+.env
+.env.local
+.env*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
