@@ -9,10 +9,11 @@ Everything below is the one-time setup that needs you (accounts + secrets). The 
 
 ## 2. Environment variables
 Create `.env.local` (local) and set the same in Vercel (Project → Settings → Environment Variables). See `.env.example`:
-- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
-- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SESSION_SECRET` — generate one: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — **required** (the app is fully server-side)
+- `SESSION_SECRET` — **required.** Generate one: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
 - `FOOTBALL_DATA_TOKEN` — free from football-data.org (only needed for the "hämta resultat" button)
+- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` — **optional**, not read by any code today (reserved for a possible future client-side use)
+- `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `ADMIN_DISPLAY_NAME` — only used by the one-time `seed:admin` script (step 3); `ADMIN_DISPLAY_NAME` defaults to `Carl`
 
 ## 3. Seed the data (with env set locally)
 
