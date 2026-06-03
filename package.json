@@ -9,6 +9,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed:admin": "tsx scripts/seed-admin.ts",
+    "seed:tournament": "tsx scripts/seed-tournament.ts",
     "build:fixtures": "tsx scripts/build-fixtures.ts"
   },
   "dependencies": {
