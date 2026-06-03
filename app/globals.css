@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root { color-scheme: light; }
+
 body {
-  background: #fdeecf;
+  background-color: #fdeecf;
+  background-image: radial-gradient(#1c1c22 1.1px, transparent 1.1px);
+  background-size: 18px 18px;
+  background-position: -9px -9px;
   color: #1c1c22;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer components {
+  .retro-card { @apply bg-paper border-[3px] border-ink rounded-2xl shadow-hard; }
+  .retro-pill { @apply inline-block text-white text-[11px] font-extrabold tracking-wider uppercase px-3 py-1.5 rounded-full border-[2.5px] border-ink; }
+  .retro-tab { @apply text-[13px] font-extrabold uppercase tracking-wide px-3.5 py-2 rounded-full border-[2.5px] border-ink bg-white; }
+  .retro-tab-active { @apply bg-ink text-white; }
+  .anton { font-family: 'Anton', Impact, sans-serif; }
 }

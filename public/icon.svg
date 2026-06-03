@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#fdeecf"/>
+  <rect x="40" y="40" width="432" height="432" rx="72" fill="#fff" stroke="#1c1c22" stroke-width="20"/>
+  <text x="256" y="300" font-family="Impact, sans-serif" font-size="200" fill="#e23b3b" text-anchor="middle">VM</text>
+</svg>
