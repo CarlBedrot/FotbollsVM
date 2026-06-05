@@ -20,15 +20,19 @@ export function SyncResults() {
     setProposals([]);
   }
   return (
-    <div className="flex flex-col gap-2">
-      <button className="retro-tab cursor-pointer" onClick={sync}>Hämta dagens resultat (API)</button>
+    <div className="formgrid">
+      <button className="btn" onClick={sync}>Hämta dagens resultat (API)</button>
       {proposals.length > 0 && (
         <>
-          <ul className="text-sm">{proposals.map((p) => <li key={p.matchId}>{p.homeLabel} {p.homeScore}–{p.awayScore} {p.awayLabel} <span className="text-[#8a7d5e]">({p.matchedBy})</span></li>)}</ul>
-          <button className="retro-tab retro-tab-active !text-white cursor-pointer" onClick={apply}>Godkänn & spara</button>
+          <ul style={{ fontSize: 13, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {proposals.map((p) => (
+              <li key={p.matchId}>{p.homeLabel} {p.homeScore}–{p.awayScore} {p.awayLabel} <span className="muted">({p.matchedBy})</span></li>
+            ))}
+          </ul>
+          <button className="btn btn-accent" onClick={apply}>Godkänn &amp; spara</button>
         </>
       )}
-      {msg && <p className="font-bold">{msg}</p>}
+      {msg && <p style={{ fontWeight: 700 }}>{msg}</p>}
     </div>
   );
 }

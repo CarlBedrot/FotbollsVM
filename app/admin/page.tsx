@@ -11,11 +11,11 @@ export const dynamic = 'force-dynamic';
 export default async function AdminPage() {
   if (!(await requireAdmin())) redirect('/');
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Card><SectionHeader pill="Admin" pillColor="#2b5fd0" title="SKAPA KONTO" /><CreateUser /></Card>
-      <Card><SectionHeader pill="Admin" pillColor="#e23b3b" title="MATA IN RESULTAT" /><EnterResult /></Card>
-      <Card><SectionHeader pill="Admin" pillColor="#1b9e5a" title="HÄMTA FRÅN API" /><SyncResults /></Card>
-      <Card><SectionHeader pill="Admin" pillColor="#f5b833" title="LÅS UPP TIPS" /><UnlockUser /></Card>
+    <div className="twocol">
+      <Card><SectionHeader title="Skapa konto" caption="Lägg till en spelare" /><CreateUser /></Card>
+      <Card><SectionHeader title="Mata in resultat" caption="Manuellt per match" /><EnterResult /></Card>
+      <Card><SectionHeader title="Hämta från API" caption="football-data.org" /><SyncResults /></Card>
+      <Card><SectionHeader title="Lås upp tips" caption="Innan avspark" /><UnlockUser /></Card>
     </div>
   );
 }

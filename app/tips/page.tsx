@@ -21,22 +21,28 @@ export default function TipsPage() {
   async function save() { const r = await post('/api/predictions'); if (r) setMsg(r.res.ok ? `Sparat! ${r.data.saved.matches} matcher, ${r.data.saved.bonus} bonus.` : (r.data.error ?? 'kunde inte spara')); }
 
   return (
-    <div className="retro-card p-6 max-w-[640px] mx-auto">
-      <h1 className="anton text-3xl mb-2">Ladda upp ditt tips</h1>
-      <p className="mb-3"><a className="font-extrabold underline" href="/api/template">Ladda ner tipslappen (.xlsx)</a> — fyll i och ladda upp nedan.</p>
-      <input type="file" accept=".xlsx" onChange={(e) => { setFile(e.target.files?.[0] ?? null); setParsed(null); setMsg(null); }} />
-      <div className="mt-3 flex gap-2">
-        <button className="retro-tab cursor-pointer" onClick={preview} disabled={!file || busy}>Visa tolkning</button>
-        <button className="retro-tab retro-tab-active !text-white cursor-pointer" onClick={save} disabled={!file || busy}>Spara tips</button>
+    <div className="card sec" style={{ maxWidth: 640, margin: '0 auto' }}>
+      <h1 style={{ fontSize: 18, fontWeight: 800, marginBottom: 2 }}>Ladda upp ditt tips</h1>
+      <div className="cap">
+        <a className="link-accent" href="/api/template">Ladda ner tipslappen (.xlsx)</a> — fyll i och ladda upp nedan.
       </div>
-      {msg && <p className="mt-3 font-bold">{msg}</p>}
+      <input type="file" accept=".xlsx" onChange={(e) => { setFile(e.target.files?.[0] ?? null); setParsed(null); setMsg(null); }} style={{ fontSize: 13 }} />
+      <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
+        <button className="btn" onClick={preview} disabled={!file || busy}>Visa tolkning</button>
+        <button className="btn btn-accent" onClick={save} disabled={!file || busy}>Spara tips</button>
+      </div>
+      {msg && <p style={{ marginTop: 12, fontWeight: 700 }}>{msg}</p>}
       {parsed && (
-        <div className="mt-4 border-t-2 border-dashed border-[#e4d6b4] pt-4">
-          <h2 className="anton text-xl mb-2">Så här tolkade vi ditt tips</h2>
+        <div style={{ marginTop: 16, borderTop: '1px solid var(--line)', paddingTop: 16 }}>
+          <h2 style={{ fontSize: 15, fontWeight: 800, marginBottom: 6 }}>Så här tolkade vi ditt tips</h2>
           <p>Namn: {parsed.name ?? '—'}</p>
-          <p>Matchtips: {Object.keys(parsed.matchPicks).length} / 72 · Bonus: {Object.keys(parsed.bonus).length} / 18</p>
-          {parsed.warnings.length > 0 && <ul className="text-vmred list-disc ml-5">{parsed.warnings.map((w, i) => <li key={i}>{w}</li>)}</ul>}
-          <p className="text-sm text-[#666] mt-2">Stämmer det? Klicka &quot;Spara tips&quot;.</p>
+          <p className="muted">Matchtips: {Object.keys(parsed.matchPicks).length} / 72 · Bonus: {Object.keys(parsed.bonus).length} / 18</p>
+          {parsed.warnings.length > 0 && (
+            <ul className="error" style={{ listStyle: 'disc', marginLeft: 20, marginTop: 6 }}>
+              {parsed.warnings.map((w, i) => <li key={i}>{w}</li>)}
+            </ul>
+          )}
+          <p className="muted" style={{ fontSize: 13, marginTop: 8 }}>Stämmer det? Klicka &quot;Spara tips&quot;.</p>
         </div>
       )}
     </div>

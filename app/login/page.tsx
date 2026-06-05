@@ -20,14 +20,15 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="max-w-[360px] mx-auto mt-[12vh]">
-      <div className="retro-card p-6">
-        <h1 className="anton text-3xl mb-4">VM-TIPSET <span className="text-vmred">2026</span></h1>
-        <form onSubmit={onSubmit} className="flex flex-col gap-2.5">
-          <input className="border-[2.5px] border-ink rounded-lg px-3 py-2" placeholder="Användarnamn" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />
-          <input className="border-[2.5px] border-ink rounded-lg px-3 py-2" type="password" placeholder="Lösenord" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
-          <button type="submit" disabled={loading} className="retro-tab retro-tab-active !text-white cursor-pointer">{loading ? 'Loggar in…' : 'Logga in'}</button>
-          {error && <p className="text-vmred font-bold text-sm">{error}</p>}
+    <main style={{ maxWidth: 360, margin: '12vh auto 0' }}>
+      <div className="card sec">
+        <h1 style={{ fontSize: 22, fontWeight: 800, marginBottom: 4 }}>VM-tipset <span style={{ color: 'var(--accent)' }}>2026</span></h1>
+        <div className="cap">Logga in för att tippa och följa loppet</div>
+        <form onSubmit={onSubmit} className="formgrid">
+          <input className="input" placeholder="Användarnamn" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />
+          <input className="input" type="password" placeholder="Lösenord" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+          <button type="submit" disabled={loading} className="btn btn-accent">{loading ? 'Loggar in…' : 'Logga in'}</button>
+          {error && <p className="error" style={{ fontSize: 13 }}>{error}</p>}
         </form>
       </div>
     </main>

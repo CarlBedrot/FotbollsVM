@@ -10,10 +10,10 @@ export function UnlockUser() {
     setMsg(res.ok ? 'Upplåst.' : 'fel');
   }
   return (
-    <form onSubmit={submit} className="flex gap-2">
-      <input className="border-[2.5px] border-ink rounded-lg px-3 py-2 flex-1" placeholder="user-id att låsa upp" value={userId} onChange={(e) => setUserId(e.target.value)} />
-      <button className="retro-tab cursor-pointer">Lås upp tips</button>
-      {msg && <span className="self-center font-bold">{msg}</span>}
+    <form onSubmit={submit} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+      <input className="input" style={{ flex: 1 }} placeholder="user-id att låsa upp" value={userId} onChange={(e) => setUserId(e.target.value)} />
+      <button className="btn">Lås upp</button>
+      {msg && <span style={{ fontWeight: 700 }}>{msg}</span>}
     </form>
   );
 }

@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Kompisgängets VM-tips 2026',
     start_url: '/',
     display: 'standalone',
-    background_color: '#fdeecf',
-    theme_color: '#e23b3b',
+    background_color: '#0b0f17',
+    theme_color: '#0b0f17',
     icons: [
       { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
     ],

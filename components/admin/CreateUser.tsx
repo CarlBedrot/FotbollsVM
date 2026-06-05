@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 export function CreateUser() {
-  const [f, setF] = useState({ username: '', displayName: '', password: '', color: '#2b5fd0', isAdmin: false });
+  const [f, setF] = useState({ username: '', displayName: '', password: '', color: '#3b82f6', isAdmin: false });
   const [msg, setMsg] = useState('');
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -11,14 +11,14 @@ export function CreateUser() {
     setMsg(res.ok ? `Skapade ${d.user.displayName}` : (d.error ?? 'fel'));
   }
   return (
-    <form onSubmit={submit} className="flex flex-col gap-2">
-      <input className="border-[2.5px] border-ink rounded-lg px-3 py-2" placeholder="Användarnamn" value={f.username} onChange={(e) => setF({ ...f, username: e.target.value })} />
-      <input className="border-[2.5px] border-ink rounded-lg px-3 py-2" placeholder="Visningsnamn" value={f.displayName} onChange={(e) => setF({ ...f, displayName: e.target.value })} />
-      <input className="border-[2.5px] border-ink rounded-lg px-3 py-2" placeholder="Lösenord" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />
-      <label className="flex items-center gap-2"><span>Färg</span><input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} /></label>
-      <label className="flex items-center gap-2"><input type="checkbox" checked={f.isAdmin} onChange={(e) => setF({ ...f, isAdmin: e.target.checked })} /> Admin</label>
-      <button className="retro-tab retro-tab-active !text-white cursor-pointer">Skapa konto</button>
-      {msg && <p className="font-bold">{msg}</p>}
+    <form onSubmit={submit} className="formgrid">
+      <input className="input" placeholder="Användarnamn" value={f.username} onChange={(e) => setF({ ...f, username: e.target.value })} />
+      <input className="input" placeholder="Visningsnamn" value={f.displayName} onChange={(e) => setF({ ...f, displayName: e.target.value })} />
+      <input className="input" placeholder="Lösenord" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />
+      <label style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="muted"><span>Färg</span><input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} /></label>
+      <label style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="muted"><input type="checkbox" checked={f.isAdmin} onChange={(e) => setF({ ...f, isAdmin: e.target.checked })} /> Admin</label>
+      <button className="btn btn-accent">Skapa konto</button>
+      {msg && <p style={{ fontWeight: 700 }}>{msg}</p>}
     </form>
   );
 }
