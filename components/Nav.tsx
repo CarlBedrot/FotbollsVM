@@ -14,6 +14,7 @@ const TABS = [
 export function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,6 +24,13 @@ export function Nav() {
     document.addEventListener('mousedown', onDoc);
     return () => document.removeEventListener('mousedown', onDoc);
   }, []);
+
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then((r) => r.json())
+      .then((d) => setIsAdmin(Boolean(d.user?.isAdmin)))
+      .catch(() => {});
+  }, [path]);
 
   return (
     <div className="top">
@@ -51,6 +59,11 @@ export function Nav() {
                 </Link>
               );
             })}
+            {isAdmin && (
+              <Link href="/admin" className={path.startsWith('/admin') ? 'active' : ''} onClick={() => setOpen(false)}>
+                Admin
+              </Link>
+            )}
           </nav>
         )}
       </div>
