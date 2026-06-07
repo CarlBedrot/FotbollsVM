@@ -1,5 +1,4 @@
-import { Avatar } from './Avatar';
-import { progressPercent } from '@/lib/view/barometer';
+import { RaceTrack } from './RaceTrack';
 import type { StandingView } from '@/lib/view/standingsView';
 
 export function RaceBarometer({ standings }: { standings: StandingView[] }) {
@@ -45,22 +44,7 @@ export function RaceBarometer({ standings }: { standings: StandingView[] }) {
           <>
             <div className="finish" />
             <div className="finlabel">168</div>
-            {standings.map((s) => {
-              const frac = progressPercent(s.totalPoints) / 92; // 0..1 of the rail
-              return (
-                <div key={s.userId} className="lane">
-                  <div className="laneName">
-                    <span className="rank-badge">{s.rank}</span>
-                    {s.displayName}
-                  </div>
-                  <div className="rail" />
-                  <div className="runner" style={{ left: `calc(108px + (100% - 156px) * ${frac})` }}>
-                    <Avatar name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={34} lead={s.rank === 1} />
-                    <span className="pts">{s.totalPoints}</span>
-                  </div>
-                </div>
-              );
-            })}
+            <RaceTrack standings={standings} />
           </>
         )}
       </div>
