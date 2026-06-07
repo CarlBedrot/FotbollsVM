@@ -17,6 +17,7 @@ export function PlayerList() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [edit, setEdit] = useState<EditState>({ displayName: '', color: '#3ee089', password: '', isAdmin: false });
   const [error, setError] = useState('');
+  const [uploadingId, setUploadingId] = useState<string | null>(null);
 
   async function load() {
     const res = await fetch('/api/admin/users');
@@ -59,6 +60,21 @@ export function PlayerList() {
     }
   }
 
+  async function uploadPhoto(id: string, file: File) {
+    setUploadingId(id);
+    setError('');
+    const body = new FormData();
+    body.append('file', file);
+    const res = await fetch(`/api/admin/users/${id}/avatar`, { method: 'POST', body });
+    setUploadingId(null);
+    if (res.ok) {
+      await load();
+    } else {
+      const d = await res.json().catch(() => ({}));
+      setError(d.error ?? 'kunde inte ladda upp foto');
+    }
+  }
+
   async function remove(p: Player) {
     if (!confirm(`Ta bort ${p.displayName}?`)) return;
     const res = await fetch(`/api/admin/users/${p.id}`, { method: 'DELETE' });
@@ -94,6 +110,20 @@ export function PlayerList() {
             <span style={{ flex: 1 }}>
               {p.displayName} <span className="muted">@{p.username}{p.isAdmin ? ' · admin' : ''}</span>
             </span>
+            <label className="btn" style={{ display: 'inline-flex', alignItems: 'center' }}>
+              {uploadingId === p.id ? 'Laddar upp…' : 'Ladda upp foto'}
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                disabled={uploadingId === p.id}
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) void uploadPhoto(p.id, file);
+                  e.target.value = '';
+                }}
+              />
+            </label>
             <button className="btn" onClick={() => startEdit(p)}>Redigera</button>
             <button className="btn" onClick={() => remove(p)}>Ta bort</button>
           </div>
