@@ -30,7 +30,15 @@ export async function POST(req: Request) {
   const file = form.get('file');
   if (!(file instanceof Blob)) return NextResponse.json({ error: 'ingen fil' }, { status: 400 });
   const buffer = Buffer.from(await file.arrayBuffer());
-  const parsed = await parseBuffer(buffer, fixtures);
+  let parsed;
+  try {
+    parsed = await parseBuffer(buffer, fixtures);
+  } catch {
+    return NextResponse.json(
+      { error: 'Kunde inte läsa filen — är det en ifylld .xlsx-tipslapp?' },
+      { status: 400 },
+    );
+  }
 
   await repo.save(
     { userId: user.userId, matchPicks: parsed.matchPicks, bonus: parsed.bonus },

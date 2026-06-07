@@ -15,6 +15,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'ingen fil' }, { status: 400 });
   }
   const buffer = Buffer.from(await file.arrayBuffer());
-  const parsed = await parseBuffer(buffer, loadFixtures());
+  let parsed;
+  try {
+    parsed = await parseBuffer(buffer, loadFixtures());
+  } catch {
+    return NextResponse.json(
+      { error: 'Kunde inte läsa filen — är det en ifylld .xlsx-tipslapp?' },
+      { status: 400 },
+    );
+  }
   return NextResponse.json({ parsed });
 }
