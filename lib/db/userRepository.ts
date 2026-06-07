@@ -23,4 +23,9 @@ export interface UserRepository {
   findById(id: string): Promise<UserRecord | null>;
   create(user: NewUser): Promise<UserRecord>;
   list(): Promise<UserRecord[]>;
+  update(
+    id: string,
+    fields: Partial<Pick<UserRecord, 'displayName' | 'color' | 'isAdmin' | 'avatarUrl' | 'passwordHash'>>,
+  ): Promise<UserRecord>;
+  remove(id: string): Promise<void>;
 }

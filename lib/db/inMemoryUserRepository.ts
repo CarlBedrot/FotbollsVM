@@ -33,4 +33,20 @@ export class InMemoryUserRepository implements UserRepository {
   async list(): Promise<UserRecord[]> {
     return [...this.users];
   }
+
+  async update(
+    id: string,
+    fields: Partial<Pick<UserRecord, 'displayName' | 'color' | 'isAdmin' | 'avatarUrl' | 'passwordHash'>>,
+  ): Promise<UserRecord> {
+    const rec = this.users.find((u) => u.id === id);
+    if (!rec) {
+      throw new Error(`user not found: ${id}`);
+    }
+    Object.assign(rec, fields);
+    return rec;
+  }
+
+  async remove(id: string): Promise<void> {
+    this.users = this.users.filter((u) => u.id !== id);
+  }
 }
