@@ -10,7 +10,8 @@
     "test:watch": "vitest",
     "seed:admin": "node --env-file=.env.local --import tsx scripts/seed-admin.ts",
     "seed:tournament": "node --env-file=.env.local --import tsx scripts/seed-tournament.ts",
-    "build:fixtures": "tsx scripts/build-fixtures.ts"
+    "build:fixtures": "tsx scripts/build-fixtures.ts",
+    "gen:icons": "tsx scripts/gen-icons.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.46.1",
@@ -28,6 +29,7 @@
     "@types/react-dom": "19.0.3",
     "autoprefixer": "10.4.20",
     "postcss": "8.5.1",
+    "sharp": "0.33.5",
     "tailwindcss": "3.4.17",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
