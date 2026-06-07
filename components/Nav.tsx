@@ -18,7 +18,6 @@ export function Nav() {
         <span className="mark">VM</span>
         <span>
           <h1>VM-tipset <span>2026</span></h1>
-          <div className="sub">Kompisligan</div>
         </span>
       </Link>
       <nav className="tabs">
