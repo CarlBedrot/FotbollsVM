@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { SESSION_COOKIE } from '@/lib/auth/cookies';
 import { verifySessionToken } from '@/lib/auth/session';
-import { getUserRepository } from '@/lib/db/repository';
+import { getUserRepository, getPredictionRepository } from '@/lib/db/repository';
 import { hashPassword } from '@/lib/auth/password';
 
 async function requireAdmin() {
@@ -17,12 +17,23 @@ export async function GET() {
   if (!(await requireAdmin())) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   }
-  const users = await getUserRepository().list();
+  const [users, preds] = await Promise.all([
+    getUserRepository().list(),
+    getPredictionRepository().all(),
+  ]);
+  const byUser = new Map(preds.map((p) => [p.userId, p]));
   return NextResponse.json({
-    users: users.map((u) => ({
-      id: u.id, username: u.username, displayName: u.displayName,
-      isAdmin: u.isAdmin, color: u.color, avatarUrl: u.avatarUrl,
-    })),
+    users: users.map((u) => {
+      const p = byUser.get(u.id);
+      const matchCount = p ? Object.keys(p.matchPicks).length : 0;
+      const bonusCount = p ? Object.keys(p.bonus).length : 0;
+      return {
+        id: u.id, username: u.username, displayName: u.displayName,
+        isAdmin: u.isAdmin, color: u.color, avatarUrl: u.avatarUrl,
+        hasPrediction: matchCount > 0 || bonusCount > 0,
+        matchCount, bonusCount,
+      };
+    }),
   });
 }
 

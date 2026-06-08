@@ -8,6 +8,9 @@ type Player = {
   isAdmin: boolean;
   color: string;
   avatarUrl: string | null;
+  hasPrediction: boolean;
+  matchCount: number;
+  bonusCount: number;
 };
 
 type EditState = { displayName: string; color: string; password: string; isAdmin: boolean };
@@ -130,6 +133,13 @@ export function PlayerList() {
               </span>
               <span style={{ flex: 1, minWidth: 140 }}>
                 {p.displayName} <span className="muted">@{p.username}{p.isAdmin ? ' · admin' : ''}</span>
+                {p.hasPrediction ? (
+                  <span style={{ color: 'var(--accent)', fontWeight: 700, fontSize: 12, marginLeft: 6 }}>
+                    ✓ tippat ({p.matchCount}/72, {p.bonusCount}/18)
+                  </span>
+                ) : (
+                  <span className="muted" style={{ fontSize: 12, marginLeft: 6 }}>· inget tips än</span>
+                )}
               </span>
               <label className="btn" style={{ display: 'inline-flex', alignItems: 'center' }}>
                 {uploadingId === p.id ? 'Laddar upp…' : 'Foto'}
