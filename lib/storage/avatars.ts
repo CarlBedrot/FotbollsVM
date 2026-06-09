@@ -16,6 +16,17 @@ export function extFromContentType(contentType: string): string | null {
 }
 
 /**
+ * Append a version query to a public URL. The stored object path is stable
+ * (`${userId}.${ext}`), so a re-upload of the same format yields a byte-identical
+ * URL — the browser keeps the old `<img src>` and the CDN serves a cached copy.
+ * A unique `?v=` per upload makes the URL change so both refetch the new image.
+ */
+export function cacheBustedUrl(publicUrl: string, version: number | string): string {
+  const sep = publicUrl.includes('?') ? '&' : '?';
+  return `${publicUrl}${sep}v=${version}`;
+}
+
+/**
  * Create the public `avatars` bucket if it doesn't already exist. Idempotent: a
  * concurrent/repeat creation that races into an "already exists" error is swallowed.
  */
@@ -50,5 +61,5 @@ export async function uploadAvatar(
   if (uploadError) throw new Error(uploadError.message);
 
   const { data } = storage.from(AVATAR_BUCKET).getPublicUrl(path);
-  return data.publicUrl;
+  return cacheBustedUrl(data.publicUrl, Date.now());
 }
