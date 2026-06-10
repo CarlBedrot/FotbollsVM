@@ -8,6 +8,7 @@ const TABS = [
   { href: '/tabell', label: 'Tabell' },
   { href: '/matcher', label: 'Matcher' },
   { href: '/statistik', label: 'Statistik' },
+  { href: '/mitt-tips', label: 'Mitt tips' },
   { href: '/profil', label: 'Min profil' },
   { href: '/installningar', label: 'Inställningar' },
 ];

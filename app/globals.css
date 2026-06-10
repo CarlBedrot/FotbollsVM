@@ -320,6 +320,33 @@ a { color: inherit; }
 .wv-faces { display: flex; flex-wrap: wrap; gap: 3px; }
 .wv-count { font-family: 'Kalam', cursive; font-weight: 700; font-size: 16px; color: var(--chalk-soft); width: 20px; text-align: right; }
 
+/* ---- mitt tips ---- */
+.mt-bonus { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 22px; }
+@media (max-width: 560px) { .mt-bonus { grid-template-columns: 1fr; } }
+.mt-bonus-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px dashed var(--chalk-line); font-size: 13px; }
+.mt-bonus-team { font-weight: 700; display: inline-flex; align-items: center; gap: 7px; }
+.mt-winners { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+.mt-winner {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+  border: 1px solid var(--chalk-line); border-radius: 999px; padding: 4px 11px;
+}
+.mt-winner b { font-family: 'Kalam', cursive; color: var(--yellow); }
+.mt-winner .fimg { width: 20px; height: 14px; }
+.mt-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 8px 26px; }
+.mt-group-h { font-family: 'Kalam', cursive; font-weight: 700; font-size: 16px; color: var(--yellow); margin-top: 12px; transform: rotate(-.5deg); }
+.mt-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; }
+.mt-row + .mt-row { border-top: 1px dashed var(--chalk-line); }
+.mt-match { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; min-width: 0; flex-wrap: wrap; }
+.mt-match .fimg { width: 19px; height: 13px; }
+.mt-date { font-family: 'Kalam', cursive; font-size: 12px; color: var(--chalk-dim); min-width: 32px; }
+.pick-chip {
+  width: 28px; height: 28px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Kalam', cursive; font-weight: 700; font-size: 15px; color: var(--yellow);
+  border: 2px solid var(--chalk-soft); border-radius: 46% 54% 48% 52% / 60% 46% 54% 40%;
+}
+.pick-chip.missing { color: var(--pink); border-style: dashed; }
+
 /* ---- segmented control (inställningar) ---- */
 .seg { display: inline-flex; gap: 4px; background: var(--card2); border: 2px solid var(--chalk-line); border-radius: 9px; padding: 4px; }
 .seg-btn {
