@@ -147,3 +147,33 @@ nav.tabs a.active { background: var(--accent); color: #06210f; }
 .pred-opt-h span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pred-opt-h em { margin-left: auto; font-style: normal; font-weight: 800; color: var(--ink); }
 .pred-faces { display: flex; flex-wrap: wrap; gap: 3px; min-height: 22px; }
+
+/* ---- light theme ---- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f5fb;
+  --card: #ffffff;
+  --card2: #eef1f8;
+  --line: #e1e6f0;
+  --ink: #0f1726;
+  --muted: #5b6576;
+  --accent: #15a05a;
+  --accent2: #0284c7;
+  --amber: #b45309;
+  --red: #dc2626;
+}
+[data-theme="light"] body { background: radial-gradient(120% 90% at 80% -10%, #e3ebfb 0%, #f3f5fb 55%) no-repeat; }
+[data-theme="light"] .card { background: var(--card); }
+[data-theme="light"] .rail { background: linear-gradient(90deg, rgba(0,0,0,.06), rgba(0,0,0,.16)); }
+[data-theme="light"] .lane + .lane { border-top-color: rgba(0,0,0,.05); }
+[data-theme="light"] .ava { border-color: rgba(0,0,0,.12); }
+[data-theme="light"] nav.tabs a.active,
+[data-theme="light"] .menu a.active,
+[data-theme="light"] .btn-accent,
+[data-theme="light"] .res.live,
+[data-theme="light"] .seg-btn.on { color: #ffffff; }
+
+/* ---- segmented control (settings) ---- */
+.seg { display: inline-flex; gap: 4px; background: var(--card2); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+.seg-btn { border: 0; background: transparent; color: var(--muted); font-weight: 700; font-size: 14px; padding: 8px 16px; border-radius: 9px; cursor: pointer; font-family: inherit; }
+.seg-btn.on { background: var(--accent); color: #06210f; }

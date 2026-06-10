@@ -9,6 +9,7 @@ const TABS = [
   { href: '/matcher', label: 'Matcher' },
   { href: '/statistik', label: 'Statistik' },
   { href: '/profil', label: 'Min profil' },
+  { href: '/installningar', label: 'Inställningar' },
 ];
 
 export function Nav() {
