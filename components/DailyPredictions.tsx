@@ -1,6 +1,6 @@
 import { Card, SectionHeader } from './Card';
 import { Avatar } from './Avatar';
-import { flagFor } from '@/lib/view/flags';
+import { Flag } from './Flag';
 import { OUTCOMES, type DailyOverview, type MatchOverview } from '@/lib/view/dailyPredictions';
 
 const TZ = 'Europe/Stockholm';
@@ -35,16 +35,14 @@ export function DailyPredictions({ overview }: { overview: DailyOverview }) {
       )}
 
       {overview.matches.map((m) => {
-        const hf = flagFor(m.homeLabel);
-        const af = flagFor(m.awayLabel);
         return (
           <div key={m.matchId} className="pred">
             <div className="pred-top">
               <span className="pred-time">{time(m.kickoff)}</span>
               <span className="pred-vs">
-                {hf && <span className="flag">{hf}</span>}{m.homeLabel}
+                <Flag team={m.homeLabel} />{m.homeLabel}
                 <i>–</i>
-                {m.awayLabel}{af && <span className="flag">{af}</span>}
+                {m.awayLabel}<Flag team={m.awayLabel} />
               </span>
               <span className="pred-n">{m.total} tippat</span>
             </div>

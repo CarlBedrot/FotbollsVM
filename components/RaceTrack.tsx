@@ -1,13 +1,13 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Avatar } from './Avatar';
-import { railFraction, runnerLeft } from '@/lib/view/barometer';
+import { railFraction, magnetTopPercent, magnetLeftPercent } from '@/lib/view/barometer';
 import type { StandingView } from '@/lib/view/standingsView';
 
 export function RaceTrack({ standings }: { standings: StandingView[] }) {
-  // On first mount every runner sits at the start gate (frac 0); once `ready`
-  // flips to true the real fracs are applied and the CSS transition glides
-  // each horse out to its position.
+  // On first mount every magnet sits in the own half (frac 0); once `ready`
+  // flips to true the real fracs are applied and the CSS transition pushes
+  // each player up the pitch towards the goal.
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -25,23 +25,22 @@ export function RaceTrack({ standings }: { standings: StandingView[] }) {
   }, []);
 
   return (
-    <>
-      {standings.map((s) => {
+    <div className="pitch">
+      <span className="goal-note">Mål = 168 p</span>
+      {standings.map((s, i) => {
         const frac = ready ? railFraction(s.totalPoints) : 0;
+        const lead = s.rank === 1;
         return (
-          <div key={s.userId} className="lane">
-            <div className="laneName">
-              <span className="rank-badge">{s.rank}</span>
-              {s.displayName}
-            </div>
-            <div className="rail" />
-            <div className="runner" style={{ left: runnerLeft(frac) }}>
-              <Avatar name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={34} lead={s.rank === 1} />
-              <span className="pts">{s.totalPoints}</span>
-            </div>
+          <div
+            key={s.userId}
+            className={`magnet${lead ? ' lead' : ''}`}
+            style={{ top: `${magnetTopPercent(frac)}%`, left: `${magnetLeftPercent(i)}%` }}
+          >
+            <Avatar name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={42} lead={lead} className="disc" />
+            <span className="tag"><b>{s.totalPoints}</b> {s.displayName}</span>
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

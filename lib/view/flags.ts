@@ -32,3 +32,18 @@ const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').to
 export function flagFor(name: string): string {
   return FLAGS[norm(name)] ?? '';
 }
+
+// UK nations use tag-sequence emoji, so their flagcdn codes can't be derived from code points.
+const SUBDIVISION_CODES: Record<string, string> = { england: 'gb-eng', scotland: 'gb-sct' };
+
+const REGIONAL_A = 0x1f1e6;
+
+/** flagcdn.com country code ('mx', 'gb-eng', …) for a team name, or '' for placeholders / unknown. */
+export function flagCodeFor(name: string): string {
+  const sub = SUBDIVISION_CODES[norm(name)];
+  if (sub) return sub;
+  const emoji = flagFor(name);
+  const points = [...emoji].map((c) => c.codePointAt(0) ?? 0);
+  if (points.length !== 2) return '';
+  return points.map((p) => String.fromCharCode(p - REGIONAL_A + 97)).join('');
+}

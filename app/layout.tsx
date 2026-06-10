@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Nav } from '@/components/Nav';
+import { Bunting } from '@/components/Bunting';
 import { RegisterSW } from '@/components/RegisterSW';
 import { ThemeScript } from '@/components/ThemeScript';
 
@@ -17,13 +18,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeScript />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body>
         <RegisterSW />
         <div className="container">
           <Nav />
+          <Bunting />
           {children}
         </div>
       </body>
