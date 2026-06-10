@@ -1,5 +1,4 @@
 import type { Pick, Prediction } from '../domain/types';
-import { impliedProbabilities, favouriteOutcome, oddsFor, type OddsBook } from '../odds/load';
 
 export interface PlayerRef {
   userId: string;
@@ -21,87 +20,7 @@ function playerRefs(users: UserInput[]): Map<string, PlayerRef> {
   return new Map(users.map((u) => [u.id, { userId: u.id, name: u.displayName, color: u.color, avatarUrl: u.avatarUrl }]));
 }
 
-/* ---------- 1. oddsavståndet ---------- */
-
-export interface OddsDistanceRow {
-  player: PlayerRef;
-  /** How many of the player's picks had odds to compare against. */
-  matchesWithOdds: number;
-  /** Average shortfall vs the bookmakers' favourite, in percentage points. 0 = always on the favourite. */
-  avgDistancePp: number;
-}
-
-/** Per player: how far the picks sit from the bookmakers' expected outcome. Sorted closest first. */
-export function oddsDistance(predictions: Prediction[], users: UserInput[], book: OddsBook): OddsDistanceRow[] {
-  const refs = playerRefs(users);
-  const rows: OddsDistanceRow[] = [];
-  for (const p of predictions) {
-    const player = refs.get(p.userId);
-    if (!player) continue;
-    let sum = 0;
-    let n = 0;
-    for (const [matchId, pick] of Object.entries(p.matchPicks)) {
-      const odds = oddsFor(book, matchId);
-      if (!odds || !OUTCOMES.includes(pick)) continue;
-      const prob = impliedProbabilities(odds);
-      sum += prob[favouriteOutcome(odds)] - prob[pick];
-      n++;
-    }
-    if (n === 0) continue;
-    rows.push({ player, matchesWithOdds: n, avgDistancePp: Math.round((sum / n) * 1000) / 10 });
-  }
-  return rows.sort((a, b) => a.avgDistancePp - b.avgDistancePp);
-}
-
-/* ---------- 3. bästa oddsträffen ---------- */
-
-interface MatchResultInput {
-  id: string;
-  homeLabel: string;
-  awayLabel: string;
-  status: string;
-  outcome: Pick | null;
-}
-
-export interface OddsHit {
-  player: PlayerRef;
-  matchId: string;
-  homeLabel: string;
-  awayLabel: string;
-  pick: Pick;
-  odds: number;
-}
-
-/** Each player's highest-odds correct pick among finished matches, best hit first. */
-export function bestOddsHits(
-  predictions: Prediction[],
-  users: UserInput[],
-  matches: MatchResultInput[],
-  book: OddsBook,
-): OddsHit[] {
-  const refs = playerRefs(users);
-  const finished = matches.filter((m) => m.status === 'finished' && m.outcome !== null);
-  const rows: OddsHit[] = [];
-  for (const p of predictions) {
-    const player = refs.get(p.userId);
-    if (!player) continue;
-    let best: OddsHit | null = null;
-    for (const m of finished) {
-      const pick = p.matchPicks[m.id];
-      if (!pick || pick !== m.outcome) continue;
-      const odds = oddsFor(book, m.id);
-      if (!odds) continue;
-      const value = odds[pick];
-      if (!best || value > best.odds) {
-        best = { player, matchId: m.id, homeLabel: m.homeLabel, awayLabel: m.awayLabel, pick, odds: value };
-      }
-    }
-    if (best) rows.push(best);
-  }
-  return rows.sort((a, b) => b.odds - a.odds);
-}
-
-/* ---------- 4. 1/X/2-fördelningen ---------- */
+/* ---------- 1/X/2-fördelningen ---------- */
 
 export interface PickSplitRow {
   player: PlayerRef;
@@ -137,7 +56,7 @@ export function pickDistribution(predictions: Prediction[], users: UserInput[]):
   return { rows, total: { counts: total, total: grand } };
 }
 
-/* ---------- 2. vinnartipsen ---------- */
+/* ---------- vinnartipsen ---------- */
 
 export interface WinnerVotes {
   teamId: string;
