@@ -1,0 +1,18 @@
+name: Sync results
+
+on:
+  schedule:
+    # Every 30 minutes during the tournament (11 June - 19 July 2026).
+    - cron: '*/30 * 11-30 6 *'
+    - cron: '*/30 * 1-19 7 *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call sync endpoint
+        run: |
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fotbolls-vm.vercel.app/api/cron/sync
