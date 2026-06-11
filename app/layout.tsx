@@ -3,6 +3,7 @@ import './globals.css';
 import { Nav } from '@/components/Nav';
 import { Bunting } from '@/components/Bunting';
 import { RegisterSW } from '@/components/RegisterSW';
+import { AutoRefresh } from '@/components/AutoRefresh';
 import { ThemeScript } from '@/components/ThemeScript';
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <RegisterSW />
+        <AutoRefresh />
         <div className="container">
           <Nav />
           <Bunting />
