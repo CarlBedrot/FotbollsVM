@@ -449,6 +449,60 @@ a { color: inherit; }
   border: 2px solid var(--chalk-soft); border-radius: 46% 54% 48% 52% / 60% 46% 54% 40%;
 }
 .pick-chip.missing { color: var(--pink); border-style: dashed; }
+/* facit: rätt/fel mot resultat */
+.pick-chip.v-right { color: #84e0a8; border-color: #84e0a8; }
+.pick-chip.v-wrong { color: var(--pink); border-color: var(--pink); }
+
+/* ---- allas tips: karusell ---- */
+.tc-tabs {
+  display: flex; gap: 6px; overflow-x: auto; padding: 2px 2px 8px;
+  -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+}
+.tc-tab {
+  flex: none; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 6px 8px; border: 2px solid var(--chalk-line); border-radius: 10px;
+  background: var(--card); color: var(--chalk-soft); cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  white-space: nowrap;
+}
+.tc-tab.on { border-color: var(--yellow); color: var(--chalk); }
+.tc-compare { align-self: flex-start; }
+.tc-scroller {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+  align-items: flex-start; -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+.tc-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; padding: 0 2px; }
+.tc-slide .card { transform: none; } /* ingen lutning i karusellen */
+.tc-hint { text-align: center; margin-top: 2px; }
+
+.ps-card { padding: 16px 18px; }
+.ps-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.ps-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: .03em; }
+.ps-cell { display: inline-flex; align-items: center; gap: 7px; flex: none; }
+.ps-diff { font-size: 13px; font-weight: 700; }
+.ps-diff.same { color: #84e0a8; }
+.ps-diff.diff { color: var(--yellow); }
+
+/* ---- head-to-head ---- */
+.cmp-bar { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.cmp-heads { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.cmp-who { display: flex; align-items: center; gap: 9px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; min-width: 0; }
+.cmp-who span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmp-who.right { justify-content: flex-end; }
+.cmp-tally { text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; color: var(--chalk-soft); white-space: nowrap; }
+.cmp-tally b { color: var(--yellow); font-size: 18px; }
+.cmp-row { display: grid; grid-template-columns: 28px 1fr 28px; align-items: center; gap: 10px; padding: 7px 6px; border-radius: 7px; }
+.cmp-row + .cmp-row { border-top: 1px dashed var(--chalk-line); }
+.cmp-row.diff { background: var(--chalk-faint); }
+.cmp-match { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 600; text-align: center; flex-wrap: wrap; min-width: 0; }
+.cmp-match .fimg { width: 19px; height: 13px; }
+.cmp-brow { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 7px 6px; border-radius: 7px; font-size: 13px; }
+.cmp-brow + .cmp-brow { border-top: 1px dashed var(--chalk-line); }
+.cmp-brow.diff { background: var(--chalk-faint); }
+.cmp-blabel { font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: .05em; font-size: 11px; color: var(--chalk-dim); white-space: nowrap; }
+.cmp-bteam { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; min-width: 0; }
+.cmp-bteam.right { justify-content: flex-end; }
 
 /* ---- segmented control (inställningar) ---- */
 .seg { display: inline-flex; gap: 4px; background: var(--card2); border: 2px solid var(--chalk-line); border-radius: 9px; padding: 4px; }
