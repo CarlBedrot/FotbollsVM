@@ -79,6 +79,38 @@ describe("proposalsFromApi", () => {
     expect(proposals[0]).toMatchObject({ matchId: "G001", matchedBy: "alias" });
   });
 
+  it('matches "Bosnia-Herzegovina" (real football-data name) against our "Bosnia & Herzegovina"', () => {
+    const matches: Match[] = [
+      {
+        id: "G007",
+        stage: "group",
+        group: "B",
+        homeTeamId: "canada",
+        awayTeamId: "bosnia-and-herzegovina",
+        status: "scheduled",
+        homeScore: null,
+        awayScore: null,
+      },
+    ];
+    const labs = {
+      G007: {
+        home: "Canada",
+        away: "Bosnia & Herzegovina",
+        kickoff: "2026-06-12T19:00:00.000Z",
+      },
+    };
+    const apiMatches = [
+      api("2026-06-12T19:00:00Z", "Canada", "Bosnia-Herzegovina", 1, 1),
+    ];
+    const proposals = proposalsFromApi(apiMatches, matches, labs);
+    expect(proposals[0]).toMatchObject({
+      matchId: "G007",
+      homeScore: 1,
+      awayScore: 1,
+      matchedBy: "alias",
+    });
+  });
+
   it('matches "Bosnia and Herzegovina" against our "Bosnia & Herzegovina"', () => {
     const matches: Match[] = [
       {

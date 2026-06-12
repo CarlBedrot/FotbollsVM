@@ -25,6 +25,7 @@ const ALIASES: Record<string, string> = {
   "ir iran": "iran",
   "korea dpr": "north korea",
   "congo dr": "dr congo",
+  "bosnia-herzegovina": "bosnia and herzegovina",
 };
 
 const norm = (s: string) =>
