@@ -1,5 +1,5 @@
-import type { Match } from '../domain/types';
-import type { ResultProposal } from './types';
+import type { Match } from "../domain/types";
+import type { ResultProposal } from "./types";
 
 export interface ApiMatch {
   utcDate: string;
@@ -15,18 +15,26 @@ export interface MatchLabels {
 
 /** Known name differences: football-data name (normalised) → our name (normalised). */
 const ALIASES: Record<string, string> = {
-  'korea republic': 'south korea',
-  'united states': 'usa',
-  'cote divoire': 'ivory coast',
-  "cote d'ivoire": 'ivory coast',
-  'czechia': 'czech republic',
-  'cape verde islands': 'cape verde',
-  'turkiye': 'turkey',
-  'ir iran': 'iran',
-  'korea dpr': 'north korea',
+  "korea republic": "south korea",
+  "united states": "usa",
+  "cote divoire": "ivory coast",
+  "cote d'ivoire": "ivory coast",
+  czechia: "czech republic",
+  "cape verde islands": "cape verde",
+  turkiye: "turkey",
+  "ir iran": "iran",
+  "korea dpr": "north korea",
+  "congo dr": "dr congo",
 };
 
-const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
+const norm = (s: string) =>
+  s
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/\s+/g, " ")
+    .trim();
 const canon = (s: string) => ALIASES[norm(s)] ?? norm(s);
 const day = (iso: string) => iso.slice(0, 10);
 
@@ -37,7 +45,7 @@ export function proposalsFromApi(
 ): ResultProposal[] {
   const proposals: ResultProposal[] = [];
   for (const am of apiMatches) {
-    if (am.status !== 'FINISHED') continue;
+    if (am.status !== "FINISHED") continue;
     const hs = am.score.fullTime.home;
     const as = am.score.fullTime.away;
     if (hs === null || as === null) continue;
@@ -46,14 +54,21 @@ export function proposalsFromApi(
     const apiAway = canon(am.awayTeam.name);
     const apiDay = day(am.utcDate);
 
-    let matched: { match: Match; how: 'exact' | 'alias' } | null = null;
+    let matched: { match: Match; how: "exact" | "alias" } | null = null;
     for (const m of ourMatches) {
       const lab = labels[m.id];
       if (!lab || day(lab.kickoff) !== apiDay) continue;
       const ourHome = norm(lab.home);
       const ourAway = norm(lab.away);
       if (ourHome === apiHome && ourAway === apiAway) {
-        matched = { match: m, how: norm(am.homeTeam.name) === ourHome && norm(am.awayTeam.name) === ourAway ? 'exact' : 'alias' };
+        matched = {
+          match: m,
+          how:
+            norm(am.homeTeam.name) === ourHome &&
+            norm(am.awayTeam.name) === ourAway
+              ? "exact"
+              : "alias",
+        };
         break;
       }
     }
@@ -69,12 +84,12 @@ export function proposalsFromApi(
       });
     } else {
       proposals.push({
-        matchId: '',
+        matchId: "",
         homeLabel: am.homeTeam.name,
         awayLabel: am.awayTeam.name,
         homeScore: hs,
         awayScore: as,
-        matchedBy: 'unmatched',
+        matchedBy: "unmatched",
       });
     }
   }
