@@ -13,11 +13,16 @@ import { proposalsFromApi, type MatchLabels } from "@/lib/results/footballData";
 import { recomputeStandings } from "@/lib/results/recompute";
 
 /** Unattended results sync: fetch finished matches from football-data, apply
- *  anything new and recompute standings. Authorized via CRON_SECRET bearer
- *  token (called from a scheduled GitHub Action), not a user session. */
+ *  anything new and recompute standings. Authorized via a bearer token —
+ *  CRON_SECRET (scheduled GitHub Action) or CRON_SECRET_ALT (external cron
+ *  service), never a user session. Two secrets so either caller can be
+ *  rotated without touching the other. */
 async function sync(req: Request) {
-  const secret = process.env.CRON_SECRET;
-  if (!secret || req.headers.get("authorization") !== `Bearer ${secret}`) {
+  const auth = req.headers.get("authorization");
+  const secrets = [process.env.CRON_SECRET, process.env.CRON_SECRET_ALT].filter(
+    Boolean,
+  );
+  if (secrets.length === 0 || !secrets.some((s) => auth === `Bearer ${s}`)) {
     return NextResponse.json({ error: "forbidden" }, { status: 403 });
   }
 
