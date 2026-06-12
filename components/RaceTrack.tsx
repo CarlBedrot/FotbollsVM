@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Avatar } from './Avatar';
+import { ClickableAvatar } from './ClickableAvatar';
 import { railFraction, magnetTopPercent, magnetLeftPercent } from '@/lib/view/barometer';
 import type { StandingView } from '@/lib/view/standingsView';
 
@@ -36,7 +36,7 @@ export function RaceTrack({ standings }: { standings: StandingView[] }) {
             className={`magnet${lead ? ' lead' : ''}`}
             style={{ top: `${magnetTopPercent(frac)}%`, left: `${magnetLeftPercent(i)}%` }}
           >
-            <Avatar name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={42} lead={lead} className="disc" />
+            <ClickableAvatar userId={s.userId} name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={42} lead={lead} className="disc" />
             <span className="tag"><b>{s.totalPoints}</b> {s.displayName}</span>
           </div>
         );

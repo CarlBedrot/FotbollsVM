@@ -1,4 +1,4 @@
-import { Avatar } from './Avatar';
+import { ClickableAvatar } from './ClickableAvatar';
 import { Card, SectionHeader } from './Card';
 import type { StandingView } from '@/lib/view/standingsView';
 import { MAX_POINTS } from '@/lib/domain/rules';
@@ -14,7 +14,7 @@ export function Leaderboard({ standings, limit }: { standings: StandingView[]; l
       {rows.map((s) => (
         <div key={s.userId} className="row">
           <div className={`pos ${s.rank <= 3 ? `p${s.rank}` : ''}`.trim()}>{s.rank}</div>
-          <Avatar name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={30} className="mini" />
+          <ClickableAvatar userId={s.userId} name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={30} className="mini" />
           <div>
             <div className="nm">{s.displayName}</div>
             <div className={`mv ${s.movement}`}>{MOVE[s.movement]}</div>

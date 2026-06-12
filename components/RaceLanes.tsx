@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, type CSSProperties } from 'react';
-import { Avatar } from './Avatar';
+import { ClickableAvatar } from './ClickableAvatar';
 import { railFraction } from '@/lib/view/barometer';
 import type { StandingView } from '@/lib/view/standingsView';
 
@@ -36,7 +36,7 @@ export function RaceLanes({ standings }: { standings: StandingView[] }) {
             <div className="lane-name">{s.displayName}</div>
             <div className="lane-rail">
               <div className="lane-runner" style={{ '--pct': frac } as CSSProperties}>
-                <Avatar name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={30} lead={lead} className="disc" />
+                <ClickableAvatar userId={s.userId} name={s.displayName} color={s.color} avatarUrl={s.avatarUrl} size={30} lead={lead} className="disc" />
               </div>
             </div>
             <div className="lane-pts"><b>{s.totalPoints}</b></div>

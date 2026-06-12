@@ -1,5 +1,5 @@
 import { Card, SectionHeader } from './Card';
-import { Avatar } from './Avatar';
+import { ClickableAvatar } from './ClickableAvatar';
 import { Flag } from './Flag';
 import type { WinnerVotes } from '@/lib/view/extraStats';
 
@@ -13,7 +13,7 @@ function VoteList({ heading, votes }: { heading: string; votes: WinnerVotes[] })
           <span className="wv-team"><Flag team={v.teamName} /> {v.teamName}</span>
           <span className="wv-faces">
             {v.voters.map((p) => (
-              <Avatar key={p.userId} name={p.name} color={p.color} avatarUrl={p.avatarUrl} size={22} />
+              <ClickableAvatar key={p.userId} userId={p.userId} name={p.name} color={p.color} avatarUrl={p.avatarUrl} size={22} />
             ))}
           </span>
           <span className="wv-count">{v.voters.length}</span>

@@ -1,5 +1,5 @@
 import { Card, SectionHeader } from './Card';
-import { Avatar } from './Avatar';
+import { ClickableAvatar } from './ClickableAvatar';
 import { Flag } from './Flag';
 import { OUTCOMES, type DailyOverview, type MatchOverview } from '@/lib/view/dailyPredictions';
 
@@ -58,7 +58,7 @@ export function DailyPredictions({ overview }: { overview: DailyOverview }) {
                     </div>
                     <div className="pred-faces">
                       {m.voters![o].map((v) => (
-                        <Avatar key={v.userId} name={v.name} color={v.color} avatarUrl={v.avatarUrl} size={22} />
+                        <ClickableAvatar key={v.userId} userId={v.userId} name={v.name} color={v.color} avatarUrl={v.avatarUrl} size={22} />
                       ))}
                     </div>
                   </div>

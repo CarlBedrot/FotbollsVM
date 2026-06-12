@@ -5,6 +5,7 @@ import { Bunting } from '@/components/Bunting';
 import { RegisterSW } from '@/components/RegisterSW';
 import { AutoRefresh } from '@/components/AutoRefresh';
 import { ThemeScript } from '@/components/ThemeScript';
+import { PlayerCardProvider } from '@/components/PlayerCardProvider';
 
 export const metadata: Metadata = {
   title: 'VM-tipset 2026',
@@ -25,11 +26,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <RegisterSW />
         <AutoRefresh />
-        <div className="container">
-          <Nav />
-          <Bunting />
-          {children}
-        </div>
+        <PlayerCardProvider>
+          <div className="container">
+            <Nav />
+            <Bunting />
+            {children}
+          </div>
+        </PlayerCardProvider>
       </body>
     </html>
   );
