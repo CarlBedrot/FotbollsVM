@@ -11,8 +11,8 @@ export default async function MatcherPage() {
   return (
     <div className="stack">
       <DailyPredictions overview={overview} />
-      <MatchList matches={groupMatches} title="Gruppspel" />
-      {knockoutMatches.length > 0 && <MatchList matches={knockoutMatches} title="Slutspel" />}
+      <MatchList matches={groupMatches} title="Gruppspel" caption="Tider i svensk tid" />
+      {knockoutMatches.length > 0 && <MatchList matches={knockoutMatches} title="Slutspel" caption="Tider i svensk tid" />}
     </div>
   );
 }

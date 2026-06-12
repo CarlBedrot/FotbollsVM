@@ -1,4 +1,5 @@
 import { RaceTrack } from './RaceTrack';
+import { RaceLanes } from './RaceLanes';
 import type { StandingView } from '@/lib/view/standingsView';
 
 export function RaceBarometer({ standings }: { standings: StandingView[] }) {
@@ -30,7 +31,13 @@ export function RaceBarometer({ standings }: { standings: StandingView[] }) {
             <p className="empty" style={{ padding: 0, textAlign: 'center' }}>Loppet startar när gänget laddat upp sina tips.</p>
           </div>
         )}
-        {standings.length > 0 && <RaceTrack standings={standings} />}
+        {standings.length > 0 && (
+          <>
+            {/* Taktiktavla på desktop, horisontella banor på mobil — CSS växlar (max-width 560px). */}
+            <div className="loppet-board"><RaceTrack standings={standings} /></div>
+            <div className="loppet-lanes"><RaceLanes standings={standings} /></div>
+          </>
+        )}
       </div>
     </section>
   );

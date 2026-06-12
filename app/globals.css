@@ -196,6 +196,42 @@ a { color: inherit; }
 .magnet .tag b { color: var(--yellow); }
 .magnet.lead .disc { outline: 3px dashed var(--yellow); outline-offset: 3px; }
 
+/* ---- Loppet mobil: horisontella banor ---- */
+/* Default: taktiktavlan syns, banorna gömda. Under 560px byter de plats. */
+.loppet-lanes { display: none; }
+@media (max-width: 560px) {
+  .loppet-board { display: none; }
+  .loppet-lanes { display: block; }
+}
+.lanes { position: relative; padding: 2px 0; }
+.lane { display: grid; grid-template-columns: 62px 1fr 30px; align-items: center; gap: 8px; padding: 8px 0; }
+.lane + .lane { border-top: 1px dashed var(--chalk-line); }
+.lane-name {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: var(--chalk);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lane.lead .lane-name { color: var(--yellow); }
+.lane-rail { position: relative; height: 30px; }
+/* kritad löparbana, indragen så brickans mitt landar på start/mål */
+.lane-rail::before {
+  content: ""; position: absolute; left: 15px; right: 15px; top: 50%; height: 2px;
+  background: var(--chalk-dim); transform: translateY(-50%);
+}
+/* mållinje vid 168 p */
+.lane-rail::after {
+  content: ""; position: absolute; right: 13px; top: 2px; bottom: 2px;
+  border-left: 2px dashed var(--yellow); opacity: .55;
+}
+.lane-runner {
+  position: absolute; top: 50%;
+  left: calc(15px + (100% - 30px) * var(--pct, 0));
+  transform: translate(-50%, -50%); z-index: 2;
+  transition: left 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) { .lane-runner { transition: none; } }
+.lane-pts { text-align: right; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; }
+.lane-pts b { color: var(--yellow); }
+
 /* ---- avatar (magnetbricka) ---- */
 .ava {
   border-radius: 50%; color: #fff; font-weight: 800;
@@ -226,6 +262,12 @@ a { color: inherit; }
 .score span { display: block; font-size: 11px; color: var(--chalk-dim); font-weight: 600; }
 
 /* ---- matcher: clipboard ---- */
+.match-day-head {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--chalk-dim);
+  padding: 14px 0 2px;
+}
+.match-day:first-child .match-day-head { padding-top: 4px; }
 .match { display: grid; grid-template-columns: 1fr 64px 1fr; align-items: center; gap: 9px; padding: 10px 0; }
 .match + .match { border-top: 1px dashed var(--chalk-line); }
 .team { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; min-width: 0; }

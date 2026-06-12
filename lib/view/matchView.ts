@@ -17,18 +17,21 @@ export interface MatchView {
 
 export function toMatchViews(dbMatches: Match[], fixtures: Fixtures): MatchView[] {
   const byId = new Map(dbMatches.map((m) => [m.id, m]));
-  return fixtures.matches.map((f) => {
-    const db = byId.get(f.id);
-    const merged: Match = db ?? {
-      id: f.id, stage: f.stage, group: f.group,
-      homeTeamId: f.homeTeamId, awayTeamId: f.awayTeamId,
-      status: 'scheduled', homeScore: null, awayScore: null,
-    };
-    return {
-      id: f.id, stage: f.stage, group: f.group,
-      homeLabel: f.homeLabel, awayLabel: f.awayLabel, kickoff: f.kickoff,
-      status: merged.status, homeScore: merged.homeScore, awayScore: merged.awayScore,
-      outcome: matchOutcome(merged),
-    };
-  });
+  return fixtures.matches
+    .map((f) => {
+      const db = byId.get(f.id);
+      const merged: Match = db ?? {
+        id: f.id, stage: f.stage, group: f.group,
+        homeTeamId: f.homeTeamId, awayTeamId: f.awayTeamId,
+        status: 'scheduled', homeScore: null, awayScore: null,
+      };
+      return {
+        id: f.id, stage: f.stage, group: f.group,
+        homeLabel: f.homeLabel, awayLabel: f.awayLabel, kickoff: f.kickoff,
+        status: merged.status, homeScore: merged.homeScore, awayScore: merged.awayScore,
+        outcome: matchOutcome(merged),
+      };
+    })
+    // Fixtures ligger grupp för grupp; presentera kronologiskt (kickoff är UTC-ISO → lexikografisk = tidsordning).
+    .sort((a, b) => a.kickoff.localeCompare(b.kickoff) || a.id.localeCompare(b.id));
 }
