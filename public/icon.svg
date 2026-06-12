@@ -1,11 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3ee089"/>
-      <stop offset="1" stop-color="#15a05a"/>
-    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#1d4733"/>
+      <stop offset="1" stop-color="#0f2b1f"/>
+    </radialGradient>
+    <radialGradient id="ball" cx="42%" cy="36%" r="72%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dfe3e8"/>
+    </radialGradient>
+    <clipPath id="clip"><circle cx="256" cy="256" r="150"/></clipPath>
   </defs>
-  <rect width="512" height="512" rx="112" fill="#0b0f17"/>
-  <rect x="96" y="150" width="320" height="212" rx="48" fill="url(#g)"/>
-  <text x="256" y="332" font-family="Inter, Arial, sans-serif" font-weight="900" font-size="150" fill="#06210f" text-anchor="middle">VM</text>
+
+  <!-- bakgrund (OS rundar hörnen på hemskärmen) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- svag kritring som ekar appens märke -->
+  <circle cx="256" cy="256" r="178" fill="none" stroke="#f2f0e4" stroke-opacity="0.22" stroke-width="3" stroke-dasharray="6 12"/>
+
+  <!-- bollen -->
+  <circle cx="256" cy="256" r="150" fill="url(#ball)" stroke="#0b0f17" stroke-width="6"/>
+
+  <g clip-path="url(#clip)" fill="#15181f">
+    <!-- mittpentagon -->
+    <polygon points="256,210 299.7,241.8 283,293.2 229,293.2 212.3,241.8"/>
+    <!-- fem kantlappar (klipps av bollens kant) -->
+    <polygon points="345.4,133 359.9,177.8 321.9,205.4 283.9,177.8 298.4,133"/>
+    <polygon points="400.5,303 362.5,330.6 324.5,303 339,258.2 386,258.2"/>
+    <polygon points="256,408 218,380.4 232.5,335.6 279.5,335.6 294,380.4"/>
+    <polygon points="111.5,303 126,258.2 173,258.2 187.5,303 149.5,330.6"/>
+    <polygon points="166.6,133 213.6,133 228.1,177.8 190.1,205.4 152.1,177.8"/>
+  </g>
+
+  <!-- sömmar från mittpentagonens hörn ut mot kanten -->
+  <g clip-path="url(#clip)" stroke="#15181f" stroke-width="5" stroke-linecap="round">
+    <line x1="256" y1="210" x2="256" y2="106"/>
+    <line x1="299.7" y1="241.8" x2="398.7" y2="209.6"/>
+    <line x1="283" y1="293.2" x2="344.2" y2="377.4"/>
+    <line x1="229" y1="293.2" x2="167.8" y2="377.4"/>
+    <line x1="212.3" y1="241.8" x2="113.3" y2="209.6"/>
+  </g>
 </svg>
