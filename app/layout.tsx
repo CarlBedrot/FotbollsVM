@@ -8,6 +8,8 @@ import { AutoRefresh } from "@/components/AutoRefresh";
 import { ThemeScript } from "@/components/ThemeScript";
 import { PlayerCardProvider } from "@/components/PlayerCardProvider";
 import { currentUser } from "@/lib/auth/currentUser";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Self-hostade via next/font: ingen render-blockerande request mot Google och
 // ingen layout-shift. CSS:en refererar dem genom var(--font-display/--font-body).
@@ -56,6 +58,8 @@ export default async function RootLayout({
             {children}
           </div>
         </PlayerCardProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
