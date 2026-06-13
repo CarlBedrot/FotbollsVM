@@ -1,11 +1,12 @@
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-import { NextResponse } from 'next/server';
-import { currentUser } from '@/lib/auth/currentUser';
-import { getMatchRepository } from '@/lib/db/repository';
+import { NextResponse } from "next/server";
+import { getMatchRepository } from "@/lib/db/repository";
+import { requireSession, isResponse } from "@/lib/api/http";
 
 export async function GET() {
-  if (!(await currentUser())) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+  const guard = await requireSession();
+  if (isResponse(guard)) return guard;
   const matches = await getMatchRepository().all();
   return NextResponse.json({ matches });
 }
