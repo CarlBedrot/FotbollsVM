@@ -2,20 +2,26 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Avatar } from "./Avatar";
 
-const TABS = [
-  { href: "/", label: "Loppet" },
-  { href: "/tabell", label: "Tabell" },
-  { href: "/matcher", label: "Matcher" },
-  { href: "/statistik", label: "Statistik" },
-  { href: "/mitt-tips", label: "Mitt tips" },
+export interface NavUser {
+  displayName: string;
+  color: string;
+  avatarUrl: string | null;
+  isAdmin: boolean;
+}
+
+// Primärnavigeringen bor i bottenraden (BottomNav). Toppraden håller bara
+// varumärket och det sekundära under avataren.
+const MENU = [
   { href: "/profil", label: "Min profil" },
   { href: "/installningar", label: "Inställningar" },
 ];
 
-/** isAdmin kommer från sessionen i serverlayouten — ingen klient-fetch per
- *  flikbyte. router.refresh() efter login/logout uppdaterar propen. */
-export function Nav({ isAdmin = false }: { isAdmin?: boolean }) {
+/** Topprad: varumärke + avatar-meny. user kommer från sessionen i
+ *  serverlayouten (ingen klient-fetch); null = utloggad, då visas bara
+ *  varumärket. */
+export function Nav({ user }: { user: NavUser | null }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -29,6 +35,12 @@ export function Nav({ isAdmin = false }: { isAdmin?: boolean }) {
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
+  async function logout() {
+    setOpen(false);
+    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    window.location.href = "/login";
+  }
+
   return (
     <div className="top">
       <Link href="/" className="brand">
@@ -39,45 +51,49 @@ export function Nav({ isAdmin = false }: { isAdmin?: boolean }) {
           </h1>
         </span>
       </Link>
-      <div className="menu-wrap" ref={ref}>
-        <button
-          className="hamburger"
-          aria-label="Meny"
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-        {open && (
-          <nav className="menu">
-            {TABS.map((t) => {
-              const active =
-                t.href === "/" ? path === "/" : path.startsWith(t.href);
-              return (
+      {user && (
+        <div className="menu-wrap" ref={ref}>
+          <button
+            className="avatar-btn"
+            aria-label="Meny"
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <Avatar
+              name={user.displayName}
+              color={user.color}
+              avatarUrl={user.avatarUrl}
+              size={40}
+            />
+          </button>
+          {open && (
+            <nav className="menu">
+              {MENU.map((t) => (
                 <Link
                   key={t.href}
                   href={t.href}
-                  className={active ? "active" : ""}
+                  className={path.startsWith(t.href) ? "active" : ""}
                   onClick={() => setOpen(false)}
                 >
                   {t.label}
                 </Link>
-              );
-            })}
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className={path.startsWith("/admin") ? "active" : ""}
-                onClick={() => setOpen(false)}
-              >
-                Admin
-              </Link>
-            )}
-          </nav>
-        )}
-      </div>
+              ))}
+              {user.isAdmin && (
+                <Link
+                  href="/admin"
+                  className={path.startsWith("/admin") ? "active" : ""}
+                  onClick={() => setOpen(false)}
+                >
+                  Admin
+                </Link>
+              )}
+              <button type="button" className="menu-logout" onClick={logout}>
+                Logga ut
+              </button>
+            </nav>
+          )}
+        </div>
+      )}
     </div>
   );
 }

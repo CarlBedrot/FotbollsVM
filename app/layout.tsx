@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/Nav";
+import { Nav, type NavUser } from "@/components/Nav";
+import { BottomNav } from "@/components/BottomNav";
 import { Bunting } from "@/components/Bunting";
 import { RegisterSW } from "@/components/RegisterSW";
 import { AutoRefresh } from "@/components/AutoRefresh";
 import { ThemeScript } from "@/components/ThemeScript";
 import { PlayerCardProvider } from "@/components/PlayerCardProvider";
 import { currentUser } from "@/lib/auth/currentUser";
+import { getUserRepository } from "@/lib/db/repository";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -37,7 +39,23 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await currentUser();
+  const session = await currentUser();
+  // Hämta profil för avatarmenyn; null vid utloggad eller om uppslaget fallerar
+  // (toppraden visar då bara varumärket, inget kraschar).
+  let navUser: NavUser | null = null;
+  if (session) {
+    const record = await getUserRepository()
+      .findById(session.userId)
+      .catch(() => null);
+    if (record) {
+      navUser = {
+        displayName: record.displayName,
+        color: record.color,
+        avatarUrl: record.avatarUrl,
+        isAdmin: record.isAdmin,
+      };
+    }
+  }
   return (
     <html
       lang="sv"
@@ -53,10 +71,11 @@ export default async function RootLayout({
         <AutoRefresh />
         <PlayerCardProvider>
           <div className="container">
-            <Nav isAdmin={Boolean(user?.isAdmin)} />
+            <Nav user={navUser} />
             <Bunting />
             {children}
           </div>
+          {navUser && <BottomNav />}
         </PlayerCardProvider>
         <Analytics />
         <SpeedInsights />
