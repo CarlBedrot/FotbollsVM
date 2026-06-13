@@ -55,6 +55,7 @@ body {
   background-attachment: fixed;
   color: var(--chalk);
   font-family:
+    var(--font-body),
     "Hanken Grotesk",
     -apple-system,
     BlinkMacSystemFont,
@@ -126,7 +127,7 @@ a {
   justify-content: center;
   position: relative;
   color: var(--chalk);
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.04em;
@@ -139,7 +140,7 @@ a {
   border: 1px dashed var(--chalk-dim);
 }
 .brand h1 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 27px;
   font-weight: 700;
   line-height: 1.05;
@@ -201,7 +202,7 @@ a {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 .menu a {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--chalk-soft);
@@ -327,7 +328,7 @@ a {
   padding: 16px 19px 18px;
 }
 .sec h3 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 21px;
   font-weight: 700;
   margin: 0;
@@ -345,7 +346,7 @@ a {
   opacity: 0.55;
 }
 .sec .cap {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   color: var(--chalk-dim);
   margin: 5px 0 12px;
@@ -368,7 +369,7 @@ a {
   padding: 16px 20px 12px;
 }
 .hero-head h2 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 25px;
   font-weight: 700;
   margin: 0;
@@ -386,7 +387,7 @@ a {
   opacity: 0.55;
 }
 .hero-head .note {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 16px;
   color: var(--yellow);
   letter-spacing: 0.04em;
@@ -437,7 +438,7 @@ a {
   top: 7px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   color: var(--yellow);
   z-index: 3;
@@ -474,7 +475,7 @@ a {
   );
 }
 .magnet .tag {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   color: var(--chalk);
   white-space: nowrap;
@@ -517,7 +518,7 @@ a {
   border-top: 1px dashed var(--chalk-line);
 }
 .lane-name {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--chalk);
@@ -568,7 +569,7 @@ a {
 }
 .lane-pts {
   text-align: right;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 17px;
   font-weight: 700;
 }
@@ -681,14 +682,14 @@ a {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
 }
 .pc-name {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.03em;
   margin-top: 4px;
 }
 .pc-rank {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 15px;
   color: var(--chalk-soft);
 }
@@ -700,7 +701,7 @@ a {
   margin: 14px 0 4px;
 }
 .pc-points b {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 34px;
   font-weight: 700;
   color: var(--yellow);
@@ -717,7 +718,7 @@ a {
   border-top: 1px dashed var(--chalk-line);
 }
 .pc-next-h {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -737,7 +738,7 @@ a {
   font-style: normal;
 }
 .pc-next-time {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   color: var(--chalk-soft);
   margin-top: 2px;
@@ -773,7 +774,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 16px;
   color: var(--chalk-soft);
@@ -799,7 +800,7 @@ a {
   font-weight: 700;
 }
 .mv {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
 }
 .mv.up {
@@ -818,7 +819,7 @@ a {
   text-align: right;
 }
 .score b {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 21px;
   font-weight: 700;
   color: var(--yellow);
@@ -832,7 +833,7 @@ a {
 
 /* ---- matcher: clipboard ---- */
 .match-day-head {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -871,7 +872,7 @@ a {
 }
 .res {
   text-align: center;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 16px;
   border: 2px solid var(--chalk-line);
@@ -884,7 +885,7 @@ a {
   color: var(--pink);
 }
 .res.sched {
-  font-family: "Hanken Grotesk", sans-serif;
+  font-family: var(--font-body), "Hanken Grotesk", sans-serif;
   font-weight: 700;
   font-size: 11px;
   color: var(--chalk-dim);
@@ -931,13 +932,13 @@ a {
   letter-spacing: 0.14em;
 }
 .stat .v {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 23px;
   font-weight: 700;
   margin-top: 3px;
 }
 .stat .w {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   color: var(--chalk-dim);
   margin-top: 1px;
@@ -964,7 +965,7 @@ a {
 .btn {
   font-size: 14px;
   font-weight: 700;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   letter-spacing: 0.02em;
   padding: 8px 16px;
   border-radius: 7px;
@@ -1022,7 +1023,7 @@ a {
   flex-wrap: wrap;
 }
 .pred-time {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   color: var(--blue);
   font-size: 15px;
@@ -1042,7 +1043,7 @@ a {
   margin-left: auto;
   color: var(--chalk-dim);
   font-size: 12px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
 }
 .pred-grid {
   display: grid;
@@ -1068,7 +1069,7 @@ a {
 }
 .pred-opt-h b {
   color: var(--clay);
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 14px;
 }
 .pred-opt-h span {
@@ -1134,7 +1135,7 @@ a {
   border-top: 2px solid var(--chalk-line);
 }
 .split-row.total .nm {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
 }
 .split-bar {
   display: flex;
@@ -1148,7 +1149,7 @@ a {
   height: 100%;
 }
 .split-nums {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 13px;
   color: var(--chalk-soft);
   white-space: nowrap;
@@ -1156,7 +1157,7 @@ a {
 
 /* ---- statistik: vinnartips ---- */
 .wv-heading {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 16px;
   color: var(--yellow);
@@ -1187,7 +1188,7 @@ a {
   gap: 3px;
 }
 .wv-count {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 16px;
   color: var(--chalk-soft);
@@ -1238,7 +1239,7 @@ a {
   padding: 4px 11px;
 }
 .mt-winner b {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   color: var(--yellow);
 }
 .mt-winner .fimg {
@@ -1251,7 +1252,7 @@ a {
   gap: 8px 26px;
 }
 .mt-group-h {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 17px;
   color: var(--yellow);
@@ -1283,7 +1284,7 @@ a {
   height: 13px;
 }
 .mt-date {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 12px;
   color: var(--chalk-dim);
   min-width: 32px;
@@ -1295,7 +1296,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 15px;
   color: var(--yellow);
@@ -1337,7 +1338,7 @@ a {
   background: var(--card);
   color: var(--chalk-soft);
   cursor: pointer;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
@@ -1381,7 +1382,7 @@ a {
   margin-bottom: 12px;
 }
 .ps-name {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -1420,7 +1421,7 @@ a {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 15px;
   min-width: 0;
@@ -1435,7 +1436,7 @@ a {
 }
 .cmp-tally {
   text-align: center;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 14px;
   color: var(--chalk-soft);
   white-space: nowrap;
@@ -1489,7 +1490,7 @@ a {
   background: var(--chalk-faint);
 }
 .cmp-blabel {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 11px;
@@ -1520,7 +1521,7 @@ a {
   border: 0;
   background: transparent;
   color: var(--chalk-dim);
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 15px;
   padding: 7px 16px;
@@ -1581,4 +1582,60 @@ a {
 }
 [data-theme="light"] .hamburger span {
   background: var(--chalk-soft);
+}
+
+/* Skelett: visas direkt vid flikbyte medan serverdatan streamas in. */
+.sk-bar {
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--chalk-faint) 25%,
+    var(--chalk-line) 37%,
+    var(--chalk-faint) 63%
+  );
+  background-size: 400% 100%;
+  animation: sk-shimmer 1.4s ease infinite;
+}
+.sk .sk-bar + .sk-bar {
+  margin-top: 12px;
+}
+.sk-title {
+  height: 18px;
+  width: 42%;
+  margin-bottom: 18px;
+}
+.sk-row {
+  height: 40px;
+}
+.sk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.sk-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sk-stat-num {
+  height: 28px;
+  width: 56%;
+}
+.sk-stat-label {
+  height: 12px;
+  width: 80%;
+  margin: 0;
+}
+@keyframes sk-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk-bar {
+    animation: none;
+  }
 }
