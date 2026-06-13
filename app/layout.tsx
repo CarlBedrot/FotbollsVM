@@ -40,21 +40,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await currentUser();
-  // Hämta profil för avatarmenyn; null vid utloggad eller om uppslaget fallerar
-  // (toppraden visar då bara varumärket, inget kraschar).
+  // Navigeringen ska finnas för varje inloggad session — den får aldrig hänga
+  // på att profil-uppslaget lyckas (övergående db-fel, eller en session vars
+  // record saknas). Profilen berikar bara avataren; faller annars tillbaka på
+  // användarnamnets initialer.
   let navUser: NavUser | null = null;
   if (session) {
     const record = await getUserRepository()
       .findById(session.userId)
       .catch(() => null);
-    if (record) {
-      navUser = {
-        displayName: record.displayName,
-        color: record.color,
-        avatarUrl: record.avatarUrl,
-        isAdmin: record.isAdmin,
-      };
-    }
+    navUser = {
+      displayName: record?.displayName ?? session.username,
+      color: record?.color ?? "var(--clay)",
+      avatarUrl: record?.avatarUrl ?? null,
+      isAdmin: session.isAdmin,
+    };
   }
   return (
     <html
