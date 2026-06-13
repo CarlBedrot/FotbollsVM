@@ -96,7 +96,8 @@ a {
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 22px 18px 72px;
+  /* Extra botten så sista innehållet inte hamnar under den flytande docken. */
+  padding: 22px 18px calc(104px + env(safe-area-inset-bottom));
   position: relative;
 }
 
@@ -216,6 +217,23 @@ a {
 }
 .menu a.active {
   color: var(--yellow);
+  background: var(--chalk-faint);
+}
+.menu-logout {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--pink);
+  background: none;
+  border: 0;
+  border-top: 1px dashed var(--chalk-line);
+  margin-top: 3px;
+  padding: 11px 13px 7px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.menu-logout:hover {
   background: var(--chalk-faint);
 }
 
@@ -1638,4 +1656,87 @@ a {
   .sk-bar {
     animation: none;
   }
+}
+
+/* ---- flytande glas-dock: appens primära navigering ---- */
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 70;
+  width: min(440px, calc(100% - 28px));
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2px;
+  padding: 9px 8px;
+  background: rgba(15, 43, 31, 0.55);
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
+  box-shadow:
+    0 10px 34px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+/* Webbläsare utan backdrop-filter: falla tillbaka på en solid tavla. */
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .bottom-nav {
+    background: var(--board-deep);
+  }
+}
+.bn-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  border-radius: 16px;
+  text-decoration: none;
+  position: relative;
+  color: var(--chalk-dim);
+  -webkit-tap-highlight-color: transparent;
+}
+.bn-tab svg {
+  width: 23px;
+  height: 23px;
+}
+.bn-tab span {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.bn-tab.active {
+  color: var(--yellow);
+}
+.bn-tab.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(247, 224, 138, 0.14);
+  border: 1px solid rgba(247, 224, 138, 0.3);
+}
+@media (hover: hover) {
+  .bn-tab:not(.active):hover {
+    color: var(--chalk-soft);
+  }
+}
+
+[data-theme="light"] .bottom-nav {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(36, 50, 64, 0.14);
+  box-shadow:
+    0 10px 34px rgba(36, 50, 64, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+[data-theme="light"] .bn-tab.active::before {
+  background: rgba(180, 83, 9, 0.12);
+  border-color: rgba(180, 83, 9, 0.3);
 }
