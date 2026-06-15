@@ -1,52 +1,48 @@
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-import { NextResponse } from 'next/server';
-import { loadFixtures } from '@/lib/fixtures/load';
-import { getMatchRepository, getStandingsRepository, getPredictionRepository, getUserRepository } from '@/lib/db/repository';
-import { fetchWorldCupMatches } from '@/lib/results/footballDataClient';
-import { proposalsFromApi, type MatchLabels } from '@/lib/results/footballData';
-import { recomputeStandings } from '@/lib/results/recompute';
+import { NextResponse } from "next/server";
+import { loadFixtures } from "@/lib/fixtures/load";
+import {
+  getMatchRepository,
+  getStandingsRepository,
+  getPredictionRepository,
+  getUserRepository,
+} from "@/lib/db/repository";
+import { fetchWorldCupMatches } from "@/lib/results/footballDataClient";
+import { runResultsSync, SyncError } from "@/lib/results/syncService";
+import { jsonError } from "@/lib/api/http";
 
-/** Unattended results sync: fetch finished matches from football-data, apply
- *  anything new and recompute standings. Authorized via CRON_SECRET bearer
- *  token (called from a scheduled GitHub Action), not a user session. */
+/** Authorized via a bearer token — CRON_SECRET (scheduled GitHub Action) or
+ *  CRON_SECRET_ALT (external cron service), never a user session. Two secrets
+ *  so either caller can be rotated without touching the other. */
+function authorized(req: Request): boolean {
+  const auth = req.headers.get("authorization");
+  const secrets = [process.env.CRON_SECRET, process.env.CRON_SECRET_ALT].filter(
+    Boolean,
+  );
+  return secrets.length > 0 && secrets.some((s) => auth === `Bearer ${s}`);
+}
+
+/** Thin controller: authorize, wire repositories + the football-data client
+ *  into the sync service, and map its result/errors to HTTP. Non-200 on
+ *  unmatched results is the alarm both cron callers watch for. */
 async function sync(req: Request) {
-  const secret = process.env.CRON_SECRET;
-  if (!secret || req.headers.get('authorization') !== `Bearer ${secret}`) {
-    return NextResponse.json({ error: 'forbidden' }, { status: 403 });
-  }
+  if (!authorized(req)) return jsonError("forbidden", 403);
 
-  const fixtures = loadFixtures();
-  const labels: MatchLabels = {};
-  for (const m of fixtures.matches) labels[m.id] = { home: m.homeLabel, away: m.awayLabel, kickoff: m.kickoff };
-
-  let apiMatches;
   try {
-    apiMatches = await fetchWorldCupMatches();
+    const result = await runResultsSync({
+      fixtures: loadFixtures(),
+      matchRepo: getMatchRepository(),
+      standingsRepo: getStandingsRepository(),
+      predRepo: getPredictionRepository(),
+      userRepo: getUserRepository(),
+      fetchMatches: fetchWorldCupMatches,
+    });
+    return NextResponse.json(result, { status: result.ok ? 200 : 500 });
   } catch (e) {
-    return NextResponse.json({ error: (e as Error).message }, { status: 502 });
+    if (e instanceof SyncError) return jsonError(e.message, e.status);
+    throw e;
   }
-
-  const matchRepo = getMatchRepository();
-  const ourMatches = await matchRepo.all();
-  const proposals = proposalsFromApi(apiMatches, ourMatches, labels).filter((p) => p.matchedBy !== 'unmatched');
-  if (proposals.length === 0) {
-    return NextResponse.json({ ok: true, applied: 0 });
-  }
-
-  const admin = (await getUserRepository().list()).find((u) => u.isAdmin);
-  if (!admin) return NextResponse.json({ error: 'no admin user' }, { status: 500 });
-
-  for (const p of proposals) {
-    await matchRepo.setResult(p.matchId, { homeScore: p.homeScore, awayScore: p.awayScore, source: 'api', updatedBy: admin.id });
-  }
-  await recomputeStandings({
-    teams: fixtures.teams,
-    matchRepo,
-    standingsRepo: getStandingsRepository(),
-    predRepo: getPredictionRepository(),
-  });
-  return NextResponse.json({ ok: true, applied: proposals.length, results: proposals.map((p) => `${p.homeLabel} ${p.homeScore}-${p.awayScore} ${p.awayLabel}`) });
 }
 
 export async function POST(req: Request) {

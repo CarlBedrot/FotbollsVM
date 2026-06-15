@@ -13,14 +13,11 @@ export interface PlayerSeed {
 
 interface PlayerCard extends PlayerSeed {
   rank: number | null;
-  movement: 'up' | 'down' | 'same' | 'new' | null;
   totalPoints: number;
   nextMatch: { homeLabel: string; awayLabel: string; kickoff: string } | null;
   nextPick: '1' | 'X' | '2' | null;
   revealed: boolean;
 }
-
-const MOVE: Record<string, string> = { up: '▲', down: '▼', same: '—', new: '★' };
 
 function pickLabel(pick: '1' | 'X' | '2', m: { homeLabel: string; awayLabel: string }) {
   if (pick === '1') return `${m.homeLabel} vinner`;
@@ -76,10 +73,7 @@ export function PlayerCardModal({ seed, onClose }: { seed: PlayerSeed; onClose: 
           <Avatar name={seed.displayName} color={seed.color} avatarUrl={seed.avatarUrl} size={96} className="pc-ava" />
           <div className="pc-name">{seed.displayName}</div>
           {card?.rank != null && (
-            <div className="pc-rank">
-              {card.rank}:a plats
-              {card.movement && <span className={`mv ${card.movement}`}> {MOVE[card.movement]}</span>}
-            </div>
+            <div className="pc-rank">{card.rank}:a plats</div>
           )}
         </div>
 

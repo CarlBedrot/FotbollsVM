@@ -1,27 +1,26 @@
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-import { NextResponse } from 'next/server';
-import { parseBuffer } from '@/lib/excel/parse';
-import { loadFixtures } from '@/lib/fixtures/load';
-import { currentUser } from '@/lib/auth/currentUser';
+import { NextResponse } from "next/server";
+import { parseBuffer } from "@/lib/excel/parse";
+import { loadFixtures } from "@/lib/fixtures/load";
+import { requireSession, isResponse, badRequest } from "@/lib/api/http";
 
 export async function POST(req: Request) {
-  if (!(await currentUser())) {
-    return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  }
+  const guard = await requireSession();
+  if (isResponse(guard)) return guard;
+
   const form = await req.formData();
-  const file = form.get('file');
+  const file = form.get("file");
   if (!(file instanceof Blob)) {
-    return NextResponse.json({ error: 'ingen fil' }, { status: 400 });
+    return badRequest("ingen fil");
   }
   const buffer = Buffer.from(await file.arrayBuffer());
   let parsed;
   try {
     parsed = await parseBuffer(buffer, loadFixtures());
   } catch {
-    return NextResponse.json(
-      { error: 'Kunde inte läsa filen — är det en ifylld .xlsx-tipslapp?' },
-      { status: 400 },
+    return badRequest(
+      "Kunde inte läsa filen — är det en ifylld .xlsx-tipslapp?",
     );
   }
   return NextResponse.json({ parsed });

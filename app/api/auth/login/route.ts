@@ -1,28 +1,28 @@
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-import { NextResponse } from 'next/server';
-import { getUserRepository } from '@/lib/db/repository';
-import { authenticate } from '@/lib/auth/loginService';
-import { createSessionToken } from '@/lib/auth/session';
-import { SESSION_COOKIE, sessionCookieOptions } from '@/lib/auth/cookies';
+import { NextResponse } from "next/server";
+import { getUserRepository } from "@/lib/db/repository";
+import { authenticate } from "@/lib/auth/loginService";
+import { createSessionToken } from "@/lib/auth/session";
+import { SESSION_COOKIE, sessionCookieOptions } from "@/lib/auth/cookies";
+import { readJson, isResponse, jsonError, unauthorized } from "@/lib/api/http";
 
 export async function POST(req: Request) {
-  let body: { username?: string; password?: string };
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: 'invalid body' }, { status: 400 });
-  }
+  const body = await readJson<{ username?: string; password?: string }>(req);
+  if (isResponse(body)) return body;
+
   const { username, password } = body;
   if (!username || !password) {
-    return NextResponse.json({ error: 'missing credentials' }, { status: 400 });
+    return jsonError("missing credentials", 400);
   }
   const session = await authenticate(getUserRepository(), username, password);
   if (!session) {
-    return NextResponse.json({ error: 'fel användarnamn eller lösenord' }, { status: 401 });
+    return unauthorized("fel användarnamn eller lösenord");
   }
   const token = await createSessionToken(session);
-  const res = NextResponse.json({ user: { username: session.username, isAdmin: session.isAdmin } });
+  const res = NextResponse.json({
+    user: { username: session.username, isAdmin: session.isAdmin },
+  });
   res.cookies.set(SESSION_COOKIE, token, sessionCookieOptions());
   return res;
 }

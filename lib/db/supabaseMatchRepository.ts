@@ -1,6 +1,11 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
-import type { GroupId, Match, MatchStatus, Stage } from '../domain/types';
-import type { MatchRepository, MatchResultInput } from './matchRepository';
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { GroupId, Match, MatchStatus, Stage } from "../domain/types";
+import type {
+  LiveScoreInput,
+  MatchRepository,
+  MatchResultInput,
+  MatchTeamsInput,
+} from "./matchRepository";
 
 interface MatchRow {
   id: string;
@@ -31,24 +36,51 @@ export class SupabaseMatchRepository implements MatchRepository {
 
   async all(): Promise<Match[]> {
     const { data, error } = await this.db
-      .from('matches')
-      .select('id,stage,group,home_team_id,away_team_id,status,home_score,away_score');
+      .from("matches")
+      .select(
+        "id,stage,group,home_team_id,away_team_id,status,home_score,away_score",
+      );
     if (error) throw new Error(error.message);
     return (data as MatchRow[]).map(mapMatchRow);
   }
 
   async setResult(matchId: string, result: MatchResultInput): Promise<void> {
     const { error } = await this.db
-      .from('matches')
+      .from("matches")
       .update({
         home_score: result.homeScore,
         away_score: result.awayScore,
-        status: 'finished',
+        status: "finished",
         result_source: result.source,
         updated_by: result.updatedBy,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', matchId);
+      .eq("id", matchId);
+    if (error) throw new Error(error.message);
+  }
+
+  async setTeams(matchId: string, teams: MatchTeamsInput): Promise<void> {
+    const { error } = await this.db
+      .from("matches")
+      .update({
+        home_team_id: teams.homeTeamId,
+        away_team_id: teams.awayTeamId,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", matchId);
+    if (error) throw new Error(error.message);
+  }
+
+  async setLiveScore(matchId: string, score: LiveScoreInput): Promise<void> {
+    const { error } = await this.db
+      .from("matches")
+      .update({
+        home_score: score.homeScore,
+        away_score: score.awayScore,
+        status: "live",
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", matchId);
     if (error) throw new Error(error.message);
   }
 }

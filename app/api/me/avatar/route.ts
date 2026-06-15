@@ -1,24 +1,29 @@
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-import { NextResponse } from 'next/server';
-import { currentUser } from '@/lib/auth/currentUser';
-import { getUserRepository } from '@/lib/db/repository';
-import { uploadAvatar, extFromContentType } from '@/lib/storage/avatars';
+import { NextResponse } from "next/server";
+import { getUserRepository } from "@/lib/db/repository";
+import { uploadAvatar, extFromContentType } from "@/lib/storage/avatars";
+import { requireSession, isResponse, badRequest } from "@/lib/api/http";
 
 // A logged-in user uploads their OWN profile photo.
 export async function POST(req: Request) {
-  const u = await currentUser();
-  if (!u) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+  const session = await requireSession();
+  if (isResponse(session)) return session;
 
   const form = await req.formData();
-  const file = form.get('file');
-  if (!(file instanceof Blob)) return NextResponse.json({ error: 'ingen fil' }, { status: 400 });
-  if (file.size > 3 * 1024 * 1024) return NextResponse.json({ error: 'Bilden får vara max 3 MB' }, { status: 400 });
+  const file = form.get("file");
+  if (!(file instanceof Blob)) return badRequest("ingen fil");
+  if (file.size > 3 * 1024 * 1024)
+    return badRequest("Bilden får vara max 3 MB");
   const ext = extFromContentType(file.type);
-  if (!ext) return NextResponse.json({ error: 'Bildformat stöds ej (png, jpg eller webp)' }, { status: 400 });
+  if (!ext) return badRequest("Bildformat stöds ej (png, jpg eller webp)");
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const avatarUrl = await uploadAvatar(u.userId, { buffer, contentType: file.type, ext });
-  await getUserRepository().update(u.userId, { avatarUrl });
+  const avatarUrl = await uploadAvatar(session.userId, {
+    buffer,
+    contentType: file.type,
+    ext,
+  });
+  await getUserRepository().update(session.userId, { avatarUrl });
   return NextResponse.json({ avatarUrl });
 }
