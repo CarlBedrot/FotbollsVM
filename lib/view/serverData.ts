@@ -4,6 +4,7 @@ import { mergeStandings, type StandingView } from './standingsView';
 import { toMatchViews, type MatchView } from './matchView';
 import { buildDailyOverview, dayKeyInTz, type DailyOverview } from './dailyPredictions';
 import { pickDistribution, winnerBoard, type PickSplit, type WinnerBoard } from './extraStats';
+import { buildPointsTimeline, type MatchMeta, type PointsTimeline } from './pointsTimeline';
 import { isLocked } from '../tips/lock';
 
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
@@ -81,4 +82,18 @@ export async function loadExtraStats(now: Date = new Date()): Promise<ExtraStats
     split: pickDistribution(predictions, ordered),
     winners: winnerBoard(predictions, ordered, fixtures.teams),
   };
+}
+
+/** Cumulative total points per player after each finished match, for the graph. */
+export async function loadPointsTimeline(): Promise<PointsTimeline> {
+  const fixtures = loadFixtures();
+  const [matches, predictions] = await Promise.all([
+    safe(() => getMatchRepository().all(), []),
+    safe(() => getPredictionRepository().all(), []),
+  ]);
+  const meta: MatchMeta = {};
+  for (const m of fixtures.matches) {
+    meta[m.id] = { kickoff: m.kickoff, label: `${m.homeLabel}–${m.awayLabel}` };
+  }
+  return buildPointsTimeline({ teams: fixtures.teams, matches, predictions }, meta);
 }
