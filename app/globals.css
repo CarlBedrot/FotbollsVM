@@ -544,3 +544,42 @@ a { color: inherit; }
 [data-theme="light"] .ava { border-color: rgba(255, 255, 255, .85); box-shadow: 0 2px 6px rgba(36, 50, 64, .3); }
 [data-theme="light"] .menu { background: #ffffff; box-shadow: 0 16px 40px rgba(36, 50, 64, .18); }
 [data-theme="light"] .hamburger span { background: var(--chalk-soft); }
+
+/* ── Utveckling: poäng per match ───────────────────────────── */
+.chart-wrap { position: relative; width: 100%; }
+.chart-svg { width: 100%; height: auto; display: block; }
+.chart-grid { stroke: var(--chalk-line); stroke-width: 1; }
+.chart-axis { fill: var(--muted); font-size: 11px; }
+.chart-axis-title { fill: var(--muted); font-size: 11px; letter-spacing: .04em; }
+.chart-cursor { stroke: var(--chalk-soft); stroke-dasharray: 3 3; stroke-width: 1; }
+.chart-endlabel { font-size: 11px; font-weight: 700; }
+
+.chart-tooltip {
+  position: absolute; top: 8px; transform: translateX(-50%);
+  background: var(--board-deep); border: 1px solid var(--chalk-line);
+  border-radius: 10px; padding: 8px 10px; pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35); min-width: 150px; z-index: 2;
+}
+.chart-tooltip-head { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.chart-tooltip-row { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 1px 0; color: var(--ink); }
+.chart-tooltip-row .nm { flex: 1; white-space: nowrap; }
+.chart-tooltip-row .dot, .legend-chip .dot {
+  width: 9px; height: 9px; border-radius: 50%; flex: none; display: inline-block;
+}
+
+.legend-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.legend-title { font-weight: 700; color: var(--ink); }
+.legend-all {
+  font-size: 12px; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--chalk-line); background: transparent; color: var(--ink); cursor: pointer;
+}
+.legend-all.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.legend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 6px; }
+.legend-chip {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer;
+  border: 1px solid transparent; border-radius: 8px; background: var(--card2);
+  color: var(--ink); text-align: left; font-size: 13px;
+}
+.legend-chip .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.legend-chip .pts { color: var(--muted); font-size: 12px; }
+.legend-chip.on { border-color: var(--accent); background: var(--card); }
