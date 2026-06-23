@@ -3,8 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-// De fem primära flikarna. Sekundärt (profil, inställningar, admin, logga ut)
-// bor under avataren i toppraden — en bottenrad dör med fler än fem.
+// Primära flikarna. Sekundärt (profil, inställningar, admin, logga ut)
+// bor under avataren i toppraden.
 const TABS: { href: string; label: string; icon: ReactNode }[] = [
   {
     href: "/",
@@ -38,6 +38,16 @@ const TABS: { href: string; label: string; icon: ReactNode }[] = [
       <>
         <rect x="3" y="6" width="18" height="12" rx="2" />
         <path d="M12 6v12" />
+      </>
+    ),
+  },
+  {
+    href: "/utveckling",
+    label: "Utveckling",
+    icon: (
+      <>
+        <path d="M4 19V5" />
+        <path d="M4 16l5-5 4 3 7-8" />
       </>
     ),
   },
