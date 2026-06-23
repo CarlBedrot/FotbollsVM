@@ -1,15 +1,21 @@
-import Link from 'next/link';
-import { Card, SectionHeader } from '@/components/Card';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { ChangePassword } from '@/components/ChangePassword';
-import { LogoutButton } from '@/components/LogoutButton';
+import Link from "next/link";
+import { Card, SectionHeader } from "@/components/Card";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { PushToggle } from "@/components/PushToggle";
+import { ChangePassword } from "@/components/ChangePassword";
+import { LogoutButton } from "@/components/LogoutButton";
 
 export default function SettingsPage() {
   return (
-    <div className="stack" style={{ maxWidth: 520, margin: '0 auto' }}>
+    <div className="stack" style={{ maxWidth: 520, margin: "0 auto" }}>
       <Card>
         <SectionHeader title="Tema" caption="Välj appens utseende" />
         <ThemeToggle />
+      </Card>
+
+      <Card>
+        <SectionHeader title="Notiser" caption="Morgonrapport om ställningen" />
+        <PushToggle />
       </Card>
 
       <Card>
@@ -20,8 +26,11 @@ export default function SettingsPage() {
       <Card>
         <SectionHeader title="Profil" />
         <p className="muted" style={{ margin: 0, fontSize: 14 }}>
-          Profilbild, visningsnamn och färg ändrar du på{' '}
-          <Link className="link-accent" href="/profil">Min profil</Link>.
+          Profilbild, visningsnamn och färg ändrar du på{" "}
+          <Link className="link-accent" href="/profil">
+            Min profil
+          </Link>
+          .
         </p>
       </Card>
 

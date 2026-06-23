@@ -6,7 +6,7 @@
 //     sida (eller en minimal offline-skärm). Online = alltid färskt.
 //   allt annat (RSC-payloads, /api) → rakt till nätet, aldrig cachat, så
 //     ställning och resultat aldrig serveras inaktuellt.
-const CACHE = "vmt-v2";
+const CACHE = "vmt-v3";
 const STATIC = /\/_next\/static\//;
 const ASSET = /\.(?:woff2?|png|svg|ico|jpg|jpeg|webp)$/;
 
@@ -19,6 +19,41 @@ h1{font-size:20px;margin:0 0 8px}p{opacity:.7;margin:0}</style></head>
 <body><div><h1>Ingen anslutning</h1><p>VM-tipset laddar igen när du är online.</p></div></body></html>`;
 
 self.addEventListener("install", () => self.skipWaiting());
+
+// Morning digest push. Payload is the JSON the daily-push cron sent:
+// { title, body, url }. Falls back gracefully if it ever arrives empty.
+self.addEventListener("push", (e) => {
+  let data = {};
+  try {
+    data = e.data ? e.data.json() : {};
+  } catch {
+    data = {};
+  }
+  const title = data.title || "VM-tipset";
+  const options = {
+    body: data.body || "",
+    icon: "/icon-192.png",
+    badge: "/icon-192.png",
+    data: { url: data.url || "/" },
+  };
+  e.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Tapping the notification focuses an open app window or opens a new one.
+self.addEventListener("notificationclick", (e) => {
+  e.notification.close();
+  const target = (e.notification.data && e.notification.data.url) || "/";
+  e.waitUntil(
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clients) => {
+        for (const client of clients) {
+          if ("focus" in client) return client.focus();
+        }
+        return self.clients.openWindow(target);
+      }),
+  );
+});
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(
