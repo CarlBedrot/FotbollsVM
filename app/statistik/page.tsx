@@ -1,17 +1,19 @@
 import { StatGrid } from '@/components/StatGrid';
 import { PickSplit } from '@/components/PickSplit';
 import { WinnerPicks } from '@/components/WinnerPicks';
+import { GoalsFacitCard } from '@/components/GoalsFacit';
 import { Card, SectionHeader } from '@/components/Card';
 import { computeStats } from '@/lib/view/stats';
-import { loadStandingsView, loadExtraStats } from '@/lib/view/serverData';
+import { loadStandingsView, loadExtraStats, loadGoalsFacit } from '@/lib/view/serverData';
 
 export const dynamic = 'force-dynamic';
 
 export default async function StatistikPage() {
-  const [standings, extra] = await Promise.all([loadStandingsView(), loadExtraStats()]);
+  const [standings, extra, goalsFacit] = await Promise.all([loadStandingsView(), loadExtraStats(), loadGoalsFacit()]);
   return (
     <div className="stack">
       <StatGrid stats={computeStats(standings)} />
+      <GoalsFacitCard facit={goalsFacit} />
       {!extra.revealed && (
         <Card>
           <SectionHeader title="Mer på gång" caption="1/X/2-fördelning och vinnartips" />

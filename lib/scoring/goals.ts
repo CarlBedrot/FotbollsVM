@@ -1,6 +1,7 @@
 import type { Match, Team } from '../domain/types';
 
-function totalGoalsByTeam(teams: Team[], matches: Match[]): Map<string, number> {
+/** Goals scored per team across finished group-stage matches. */
+export function teamGoalTotals(teams: Team[], matches: Match[]): Map<string, number> {
   const goals = new Map<string, number>(teams.map((t) => [t.id, 0]));
   for (const m of matches) {
     if (m.stage !== 'group' || m.status !== 'finished') continue;
@@ -13,7 +14,7 @@ function totalGoalsByTeam(teams: Team[], matches: Match[]): Map<string, number> 
 
 /** Team ids with the most total goals across the group stage (ties → all). */
 export function mostGoalsTeams(teams: Team[], matches: Match[]): string[] {
-  const goals = totalGoalsByTeam(teams, matches);
+  const goals = teamGoalTotals(teams, matches);
   const values = [...goals.values()];
   if (values.length === 0) return [];
   const max = Math.max(...values);
@@ -22,7 +23,7 @@ export function mostGoalsTeams(teams: Team[], matches: Match[]): string[] {
 
 /** Team ids with the fewest total goals across the group stage (ties → all). */
 export function fewestGoalsTeams(teams: Team[], matches: Match[]): string[] {
-  const goals = totalGoalsByTeam(teams, matches);
+  const goals = teamGoalTotals(teams, matches);
   const values = [...goals.values()];
   if (values.length === 0) return [];
   const min = Math.min(...values);

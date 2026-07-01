@@ -3,6 +3,7 @@ import { getStandingsRepository, getUserRepository, getMatchRepository, getPredi
 import { mergeStandings, type StandingView } from './standingsView';
 import { computeRemaining, pickedKnockoutTeamIds } from '../scoring/remaining';
 import { buildRemainingRows, decidedFromMatches, type RemainingRow } from './remainingView';
+import { buildGoalsFacit, type GoalsFacit } from './goalsFacit';
 import { toMatchViews, type MatchView } from './matchView';
 import { buildDailyOverview, dayKeyInTz, type DailyOverview } from './dailyPredictions';
 import { pickDistribution, winnerBoard, type PickSplit, type WinnerBoard } from './extraStats';
@@ -117,6 +118,13 @@ export async function loadRemaining(): Promise<RemainingRow[]> {
   });
   const nameById = new Map(fixtures.teams.map((t) => [t.id, t.name]));
   return buildRemainingRows(mergeStandings(standings, users), remaining, (id) => nameById.get(id) ?? id);
+}
+
+/** Group-stage most/fewest-goals result for the stats page. */
+export async function loadGoalsFacit(): Promise<GoalsFacit> {
+  const fixtures = loadFixtures();
+  const matches = await safe(() => getMatchRepository().all(), []);
+  return buildGoalsFacit(fixtures.teams, matches);
 }
 
 export interface EliminationEntry {
