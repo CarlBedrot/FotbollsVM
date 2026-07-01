@@ -7,10 +7,12 @@ import { SupabaseMatchRepository } from "./supabaseMatchRepository";
 import { SupabaseStandingsRepository } from "./supabaseStandingsRepository";
 import { SupabaseSettingsRepository } from "./settingsRepository";
 import { SupabasePushSubscriptionRepository } from "./supabasePushSubscriptionRepository";
+import { SupabaseTeamStatusRepository } from "./supabaseTeamStatusRepository";
 import type { MatchRepository } from "./matchRepository";
 import type { StandingsRepository } from "./standingsRepository";
 import type { SettingsRepository } from "./settingsRepository";
 import type { PushSubscriptionRepository } from "./pushSubscriptionRepository";
+import type { TeamStatusRepository } from "./teamStatusRepository";
 
 export function getUserRepository(): UserRepository {
   return new SupabaseUserRepository(getSupabaseAdmin());
@@ -34,4 +36,8 @@ export function getSettingsRepository(): SettingsRepository {
 
 export function getPushSubscriptionRepository(): PushSubscriptionRepository {
   return new SupabasePushSubscriptionRepository(getSupabaseAdmin());
+}
+
+export function getTeamStatusRepository(): TeamStatusRepository {
+  return new SupabaseTeamStatusRepository(getSupabaseAdmin());
 }

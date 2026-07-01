@@ -1778,3 +1778,29 @@ a {
 .legend-chip .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .legend-chip .pts { color: var(--muted); font-size: 12px; }
 .legend-chip.on { border-color: var(--accent); background: var(--card); }
+
+/* Kvar att hämta */
+.kvar-list { display: flex; flex-direction: column; gap: 8px; }
+.kvar-row { border: 1px solid var(--line); border-radius: 12px; background: var(--card2); overflow: hidden; }
+.kvar-head {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px; cursor: pointer;
+  list-style: none;
+}
+.kvar-head::-webkit-details-marker { display: none; }
+.kvar-name { font-weight: 700; color: var(--ink); flex: 1; }
+.kvar-nums { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; }
+.kvar-nums b { font-size: 20px; color: var(--ink); }
+.kvar-nums small { color: var(--muted); font-size: 12px; }
+.kvar-cats { list-style: none; margin: 0; padding: 4px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
+.kvar-cat {
+  display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 8px;
+  padding: 6px 10px; border-radius: 8px; background: var(--card); font-size: 13px;
+}
+.kvar-cat-label { font-weight: 700; color: var(--ink); }
+.kvar-cat-note { color: var(--muted); }
+.kvar-cat-pts { font-weight: 800; color: var(--muted); }
+.kvar-cat.live { border-left: 3px solid #6fce8f; }
+.kvar-cat.live .kvar-cat-pts { color: #6fce8f; }
+.kvar-cat.dead { opacity: 0.6; border-left: 3px solid #e0798a; }
+.kvar-cat.dead .kvar-cat-note { text-decoration: line-through; }
+.kvar-cat.done { border-left: 3px solid var(--chalk-line); }

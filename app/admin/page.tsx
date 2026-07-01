@@ -6,11 +6,14 @@ import { PlayerList } from '@/components/admin/PlayerList';
 import { EnterResult } from '@/components/admin/EnterResult';
 import { SyncResults } from '@/components/admin/SyncResults';
 import { UnlockUser } from '@/components/admin/UnlockUser';
+import { EliminatedTeams } from '@/components/admin/EliminatedTeams';
+import { loadEliminationBoard } from '@/lib/view/serverData';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
   if (!(await requireAdmin())) redirect('/');
+  const eliminationBoard = await loadEliminationBoard();
   return (
     <div className="twocol">
       <Card>
@@ -23,6 +26,7 @@ export default async function AdminPage() {
       <Card><SectionHeader title="Mata in resultat" caption="Manuellt per match" /><EnterResult /></Card>
       <Card><SectionHeader title="Hämta från API" caption="football-data.org" /><SyncResults /></Card>
       <Card><SectionHeader title="Lås upp tips" caption="Innan avspark" /><UnlockUser /></Card>
+      <Card><SectionHeader title="Slutspel: levande lag" caption="Slå ut lag som åkt ur — styr 'Kvar att hämta'" /><EliminatedTeams initial={eliminationBoard} /></Card>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import { loadFixtures, groupMatches } from '../fixtures/load';
-import { getStandingsRepository, getUserRepository, getMatchRepository, getPredictionRepository } from '../db/repository';
+import { getStandingsRepository, getUserRepository, getMatchRepository, getPredictionRepository, getTeamStatusRepository } from '../db/repository';
 import { mergeStandings, type StandingView } from './standingsView';
+import { computeRemaining, pickedKnockoutTeamIds } from '../scoring/remaining';
+import { buildRemainingRows, decidedFromMatches, type RemainingRow } from './remainingView';
 import { toMatchViews, type MatchView } from './matchView';
 import { buildDailyOverview, dayKeyInTz, type DailyOverview } from './dailyPredictions';
 import { pickDistribution, winnerBoard, type PickSplit, type WinnerBoard } from './extraStats';
@@ -96,4 +98,44 @@ export async function loadPointsTimeline(): Promise<PointsTimeline> {
     meta[m.id] = { kickoff: m.kickoff, label: `${m.homeLabel}–${m.awayLabel}` };
   }
   return buildPointsTimeline({ teams: fixtures.teams, matches, predictions }, meta);
+}
+
+/** Per-player "points still up for grabs" from the four knockout bonuses. */
+export async function loadRemaining(): Promise<RemainingRow[]> {
+  const fixtures = loadFixtures();
+  const [standings, users, predictions, matches, eliminated] = await Promise.all([
+    safe(() => getStandingsRepository().getAll(), []),
+    safe(() => getUserRepository().list(), []),
+    safe(() => getPredictionRepository().all(), []),
+    safe(() => getMatchRepository().all(), []),
+    safe(() => getTeamStatusRepository().getEliminated(), []),
+  ]);
+  const remaining = computeRemaining({
+    predictions: predictions.map((p) => ({ userId: p.userId, bonus: p.bonus })),
+    eliminatedTeamIds: eliminated,
+    decided: decidedFromMatches(matches),
+  });
+  const nameById = new Map(fixtures.teams.map((t) => [t.id, t.name]));
+  return buildRemainingRows(mergeStandings(standings, users), remaining, (id) => nameById.get(id) ?? id);
+}
+
+export interface EliminationEntry {
+  teamId: string;
+  teamName: string;
+  eliminated: boolean;
+}
+
+/** The knockout-picked teams admin can toggle alive/eliminated. */
+export async function loadEliminationBoard(): Promise<EliminationEntry[]> {
+  const fixtures = loadFixtures();
+  const [predictions, eliminated] = await Promise.all([
+    safe(() => getPredictionRepository().all(), []),
+    safe(() => getTeamStatusRepository().getEliminated(), []),
+  ]);
+  const elimSet = new Set(eliminated);
+  const nameById = new Map(fixtures.teams.map((t) => [t.id, t.name]));
+  const ids = pickedKnockoutTeamIds(predictions.map((p) => ({ userId: p.userId, bonus: p.bonus })));
+  return ids
+    .map((id) => ({ teamId: id, teamName: nameById.get(id) ?? id, eliminated: elimSet.has(id) }))
+    .sort((a, b) => a.teamName.localeCompare(b.teamName, 'sv'));
 }

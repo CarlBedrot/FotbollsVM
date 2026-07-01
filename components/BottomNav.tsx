@@ -51,6 +51,16 @@ const TABS: { href: string; label: string; icon: ReactNode }[] = [
       </>
     ),
   },
+  {
+    href: "/kvar",
+    label: "Kvar",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="3.5" />
+      </>
+    ),
+  },
 ];
 
 function isActive(path: string, href: string): boolean {
