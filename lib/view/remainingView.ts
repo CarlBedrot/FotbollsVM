@@ -23,15 +23,22 @@ export interface RemainingRow {
   categories: RemainingRowCategory[];
 }
 
-/** A category is "decided" once its deciding knockout match has been played. */
+/**
+ * A category is "decided" once its deciding knockout match has been played.
+ * Written as a single pass (no nested closure over the parameter) — an inlined
+ * helper that captured `matches` tripped an SWC minifier bug in the prod build.
+ */
 export function decidedFromMatches(matches: Match[]): DecidedFlags {
-  const finished = (stage: Match['stage']) =>
-    matches.filter((m) => m.stage === stage && m.status === 'finished').length;
-  return {
-    champion: finished('final') >= 1,
-    bronze: finished('bronze') >= 1,
-    finalists: finished('sf') >= 2,
-  };
+  let finalDone = false;
+  let bronzeDone = false;
+  let semifinalsFinished = 0;
+  for (const m of matches) {
+    if (m.status !== 'finished') continue;
+    if (m.stage === 'final') finalDone = true;
+    else if (m.stage === 'bronze') bronzeDone = true;
+    else if (m.stage === 'sf') semifinalsFinished += 1;
+  }
+  return { champion: finalDone, bronze: bronzeDone, finalists: semifinalsFinished >= 2 };
 }
 
 function toRowCategory(c: RemainingCategory, teamName: (id: string) => string): RemainingRowCategory {
