@@ -1,8 +1,9 @@
-import type { BonusKey } from '../domain/types';
-import { RULES } from '../domain/rules';
+import type { BonusKey } from "../domain/types";
+import { RULES } from "../domain/rules";
 
 /** The four knockout bonuses still open after the group stage. */
-export type RemainingCategoryKey = 'finalist_1' | 'finalist_2' | 'bronze' | 'champion';
+export type RemainingCategoryKey =
+  "finalist_1" | "finalist_2" | "bronze" | "champion";
 
 export interface RemainingPrediction {
   userId: string;
@@ -41,10 +42,30 @@ const CATEGORIES: {
   points: number;
   decidedKey: keyof DecidedFlags;
 }[] = [
-  { key: 'finalist_1', label: 'Finalist', points: RULES.finalistPoint, decidedKey: 'finalists' },
-  { key: 'finalist_2', label: 'Finalist', points: RULES.finalistPoint, decidedKey: 'finalists' },
-  { key: 'bronze', label: 'Brons', points: RULES.bronzePoint, decidedKey: 'bronze' },
-  { key: 'champion', label: 'VM-vinnare', points: RULES.championPoint, decidedKey: 'champion' },
+  {
+    key: "finalist_1",
+    label: "Finalist",
+    points: RULES.finalistPoint,
+    decidedKey: "finalists",
+  },
+  {
+    key: "finalist_2",
+    label: "Finalist",
+    points: RULES.finalistPoint,
+    decidedKey: "finalists",
+  },
+  {
+    key: "bronze",
+    label: "Brons",
+    points: RULES.bronzePoint,
+    decidedKey: "bronze",
+  },
+  {
+    key: "champion",
+    label: "VM-vinnare",
+    points: RULES.championPoint,
+    decidedKey: "champion",
+  },
 ];
 
 export interface RemainingInput {
@@ -66,21 +87,20 @@ export function computeRemaining(input: RemainingInput): UserRemaining[] {
       const decided = input.decided[c.decidedKey];
       const alive = teamId !== null && !eliminated.has(teamId);
       const counts = alive && !decided;
-      return { key: c.key, label: c.label, points: c.points, teamId, alive, decided, counts };
+      return {
+        key: c.key,
+        label: c.label,
+        points: c.points,
+        teamId,
+        alive,
+        decided,
+        counts,
+      };
     });
-    const reachable = categories.reduce((sum, c) => sum + (c.counts ? c.points : 0), 0);
+    const reachable = categories.reduce(
+      (sum, c) => sum + (c.counts ? c.points : 0),
+      0,
+    );
     return { userId: p.userId, reachable, categories };
   });
-}
-
-/** Team ids anyone picked for a knockout bonus — the only teams admin needs to toggle. */
-export function pickedKnockoutTeamIds(predictions: RemainingPrediction[]): string[] {
-  const ids = new Set<string>();
-  for (const p of predictions) {
-    for (const key of ['finalist_1', 'finalist_2', 'bronze', 'champion'] as const) {
-      const id = p.bonus[key];
-      if (id) ids.add(id);
-    }
-  }
-  return [...ids];
 }

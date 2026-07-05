@@ -1,14 +1,37 @@
-import { loadFixtures, groupMatches } from '../fixtures/load';
-import { getStandingsRepository, getUserRepository, getMatchRepository, getPredictionRepository, getTeamStatusRepository } from '../db/repository';
-import { mergeStandings, type StandingView } from './standingsView';
-import { computeRemaining, pickedKnockoutTeamIds } from '../scoring/remaining';
-import { buildRemainingRows, decidedFromMatches, type RemainingRow } from './remainingView';
-import { buildGoalsFacit, type GoalsFacit } from './goalsFacit';
-import { toMatchViews, type MatchView } from './matchView';
-import { buildDailyOverview, dayKeyInTz, type DailyOverview } from './dailyPredictions';
-import { pickDistribution, winnerBoard, type PickSplit, type WinnerBoard } from './extraStats';
-import { buildPointsTimeline, type MatchMeta, type PointsTimeline } from './pointsTimeline';
-import { isLocked } from '../tips/lock';
+import { loadFixtures, groupMatches } from "../fixtures/load";
+import {
+  getStandingsRepository,
+  getUserRepository,
+  getMatchRepository,
+  getPredictionRepository,
+  getTeamStatusRepository,
+} from "../db/repository";
+import { mergeStandings, type StandingView } from "./standingsView";
+import { computeRemaining } from "../scoring/remaining";
+import {
+  buildRemainingRows,
+  decidedFromMatches,
+  type RemainingRow,
+} from "./remainingView";
+import { buildGoalsFacit, type GoalsFacit } from "./goalsFacit";
+import { toMatchViews, type MatchView } from "./matchView";
+import {
+  buildDailyOverview,
+  dayKeyInTz,
+  type DailyOverview,
+} from "./dailyPredictions";
+import {
+  pickDistribution,
+  winnerBoard,
+  type PickSplit,
+  type WinnerBoard,
+} from "./extraStats";
+import {
+  buildPointsTimeline,
+  type MatchMeta,
+  type PointsTimeline,
+} from "./pointsTimeline";
+import { isLocked } from "../tips/lock";
 
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
   try {
@@ -32,19 +55,29 @@ export async function loadMatchViews(): Promise<MatchView[]> {
 }
 
 /** What everyone predicted for today's group matches (revealed only after the lock). */
-export async function loadDailyOverview(now: Date = new Date()): Promise<DailyOverview> {
+export async function loadDailyOverview(
+  now: Date = new Date(),
+): Promise<DailyOverview> {
   const fixtures = loadFixtures();
   const [predictions, users] = await Promise.all([
     safe(() => getPredictionRepository().all(), []),
     safe(() => getUserRepository().list(), []),
   ]);
   const matches = groupMatches(fixtures).map((m) => ({
-    id: m.id, homeLabel: m.homeLabel, awayLabel: m.awayLabel, kickoff: m.kickoff,
+    id: m.id,
+    homeLabel: m.homeLabel,
+    awayLabel: m.awayLabel,
+    kickoff: m.kickoff,
   }));
   return buildDailyOverview({
     matches,
     predictions,
-    users: users.map((u) => ({ id: u.id, displayName: u.displayName, color: u.color, avatarUrl: u.avatarUrl })),
+    users: users.map((u) => ({
+      id: u.id,
+      displayName: u.displayName,
+      color: u.color,
+      avatarUrl: u.avatarUrl,
+    })),
     todayKey: dayKeyInTz(now.toISOString()),
     // Reveal is global at first kickoff — pass null status so per-user admin
     // unlocks don't gate it (same lock rule the write path uses).
@@ -59,14 +92,23 @@ export interface ExtraStatsData {
   winners: WinnerBoard;
 }
 
-const EMPTY_SPLIT: PickSplit = { rows: [], total: { counts: { '1': 0, X: 0, '2': 0 }, total: 0 } };
+const EMPTY_SPLIT: PickSplit = {
+  rows: [],
+  total: { counts: { "1": 0, X: 0, "2": 0 }, total: 0 },
+};
 
 /** 1/X/2 split and winner picks for the stats page. */
-export async function loadExtraStats(now: Date = new Date()): Promise<ExtraStatsData> {
+export async function loadExtraStats(
+  now: Date = new Date(),
+): Promise<ExtraStatsData> {
   const fixtures = loadFixtures();
   const revealed = isLocked(fixtures.firstKickoff, now, null);
   if (!revealed) {
-    return { revealed, split: EMPTY_SPLIT, winners: { champion: [], finalists: [], bronze: [] } };
+    return {
+      revealed,
+      split: EMPTY_SPLIT,
+      winners: { champion: [], finalists: [], bronze: [] },
+    };
   }
 
   const [predictions, users, standings] = await Promise.all([
@@ -77,7 +119,9 @@ export async function loadExtraStats(now: Date = new Date()): Promise<ExtraStats
   // Present players in standings order when there is one, otherwise by name.
   const rankById = new Map(standings.map((s) => [s.userId, s.rank]));
   const ordered = [...users].sort(
-    (a, b) => (rankById.get(a.id) ?? 99) - (rankById.get(b.id) ?? 99) || a.displayName.localeCompare(b.displayName, 'sv'),
+    (a, b) =>
+      (rankById.get(a.id) ?? 99) - (rankById.get(b.id) ?? 99) ||
+      a.displayName.localeCompare(b.displayName, "sv"),
   );
 
   return {
@@ -98,26 +142,34 @@ export async function loadPointsTimeline(): Promise<PointsTimeline> {
   for (const m of fixtures.matches) {
     meta[m.id] = { kickoff: m.kickoff, label: `${m.homeLabel}–${m.awayLabel}` };
   }
-  return buildPointsTimeline({ teams: fixtures.teams, matches, predictions }, meta);
+  return buildPointsTimeline(
+    { teams: fixtures.teams, matches, predictions },
+    meta,
+  );
 }
 
 /** Per-player "points still up for grabs" from the four knockout bonuses. */
 export async function loadRemaining(): Promise<RemainingRow[]> {
   const fixtures = loadFixtures();
-  const [standings, users, predictions, matches, eliminated] = await Promise.all([
-    safe(() => getStandingsRepository().getAll(), []),
-    safe(() => getUserRepository().list(), []),
-    safe(() => getPredictionRepository().all(), []),
-    safe(() => getMatchRepository().all(), []),
-    safe(() => getTeamStatusRepository().getEliminated(), []),
-  ]);
+  const [standings, users, predictions, matches, eliminated] =
+    await Promise.all([
+      safe(() => getStandingsRepository().getAll(), []),
+      safe(() => getUserRepository().list(), []),
+      safe(() => getPredictionRepository().all(), []),
+      safe(() => getMatchRepository().all(), []),
+      safe(() => getTeamStatusRepository().getEliminated(), []),
+    ]);
   const remaining = computeRemaining({
     predictions: predictions.map((p) => ({ userId: p.userId, bonus: p.bonus })),
     eliminatedTeamIds: eliminated,
     decided: decidedFromMatches(matches),
   });
   const nameById = new Map(fixtures.teams.map((t) => [t.id, t.name]));
-  return buildRemainingRows(mergeStandings(standings, users), remaining, (id) => nameById.get(id) ?? id);
+  return buildRemainingRows(
+    mergeStandings(standings, users),
+    remaining,
+    (id) => nameById.get(id) ?? id,
+  );
 }
 
 /** Group-stage most/fewest-goals result for the stats page. */
@@ -133,17 +185,19 @@ export interface EliminationEntry {
   eliminated: boolean;
 }
 
-/** The knockout-picked teams admin can toggle alive/eliminated. */
+/** All tournament teams, for admin to toggle alive/eliminated. */
 export async function loadEliminationBoard(): Promise<EliminationEntry[]> {
   const fixtures = loadFixtures();
-  const [predictions, eliminated] = await Promise.all([
-    safe(() => getPredictionRepository().all(), []),
-    safe(() => getTeamStatusRepository().getEliminated(), []),
-  ]);
+  const eliminated = await safe(
+    () => getTeamStatusRepository().getEliminated(),
+    [],
+  );
   const elimSet = new Set(eliminated);
-  const nameById = new Map(fixtures.teams.map((t) => [t.id, t.name]));
-  const ids = pickedKnockoutTeamIds(predictions.map((p) => ({ userId: p.userId, bonus: p.bonus })));
-  return ids
-    .map((id) => ({ teamId: id, teamName: nameById.get(id) ?? id, eliminated: elimSet.has(id) }))
-    .sort((a, b) => a.teamName.localeCompare(b.teamName, 'sv'));
+  return fixtures.teams
+    .map((t) => ({
+      teamId: t.id,
+      teamName: t.name,
+      eliminated: elimSet.has(t.id),
+    }))
+    .sort((a, b) => a.teamName.localeCompare(b.teamName, "sv"));
 }
