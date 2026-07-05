@@ -7,6 +7,7 @@ import {
   getStandingsRepository,
   getPredictionRepository,
   getUserRepository,
+  getTeamStatusRepository,
 } from "@/lib/db/repository";
 import { fetchWorldCupMatches } from "@/lib/results/footballDataClient";
 import { runResultsSync, SyncError } from "@/lib/results/syncService";
@@ -36,6 +37,7 @@ async function sync(req: Request) {
       standingsRepo: getStandingsRepository(),
       predRepo: getPredictionRepository(),
       userRepo: getUserRepository(),
+      teamStatusRepo: getTeamStatusRepository(),
       fetchMatches: fetchWorldCupMatches,
     });
     return NextResponse.json(result, { status: result.ok ? 200 : 500 });

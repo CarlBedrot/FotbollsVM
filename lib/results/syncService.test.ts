@@ -7,6 +7,7 @@ import { InMemoryMatchRepository } from "../db/inMemoryMatchRepository";
 import { InMemoryStandingsRepository } from "../db/inMemoryStandingsRepository";
 import { InMemoryPredictionRepository } from "../db/inMemoryPredictionRepository";
 import { InMemoryUserRepository } from "../db/inMemoryUserRepository";
+import { InMemoryTeamStatusRepository } from "../db/inMemoryTeamStatusRepository";
 
 const fixtures: Fixtures = {
   season: "2026",
@@ -69,6 +70,7 @@ async function deps(
     standingsRepo: new InMemoryStandingsRepository(),
     predRepo: new InMemoryPredictionRepository(),
     userRepo,
+    teamStatusRepo: new InMemoryTeamStatusRepository(),
     fetchMatches: async () => [],
     now: new Date("2026-06-11T21:00:00Z"),
     ...over,
@@ -147,6 +149,50 @@ describe("runResultsSync", () => {
       status: 502,
       message: "football-data 429",
     });
+  });
+
+  it("marks the loser of a finished knockout match as eliminated", async () => {
+    const knockout: Match = {
+      id: "K90",
+      stage: "r16",
+      group: null,
+      homeTeamId: "mexico",
+      awayTeamId: "south-korea",
+      status: "finished",
+      homeScore: 0,
+      awayScore: 3,
+    };
+    const teamStatusRepo = new InMemoryTeamStatusRepository();
+    const d = await deps({
+      matches: [scheduledMatch(), knockout],
+      teamStatusRepo,
+    });
+
+    const result = await runResultsSync(d);
+
+    expect(result.eliminated).toEqual(["mexico"]);
+    expect(await teamStatusRepo.getEliminated()).toEqual(["mexico"]);
+  });
+
+  it("does not re-report a loser that is already eliminated", async () => {
+    const knockout: Match = {
+      id: "K90",
+      stage: "r16",
+      group: null,
+      homeTeamId: "mexico",
+      awayTeamId: "south-korea",
+      status: "finished",
+      homeScore: 0,
+      awayScore: 3,
+    };
+    const teamStatusRepo = new InMemoryTeamStatusRepository();
+    await teamStatusRepo.setEliminated("mexico", true);
+    const d = await deps({ matches: [knockout], teamStatusRepo });
+
+    const result = await runResultsSync(d);
+
+    expect(result.eliminated).toEqual([]);
+    expect(await teamStatusRepo.getEliminated()).toEqual(["mexico"]);
   });
 
   it("does nothing and stays ok when the api reports no relevant matches", async () => {

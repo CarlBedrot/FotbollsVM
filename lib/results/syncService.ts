@@ -3,6 +3,7 @@ import type { MatchRepository } from "../db/matchRepository";
 import type { StandingsRepository } from "../db/standingsRepository";
 import type { PredictionRepository } from "../db/predictionRepository";
 import type { UserRepository } from "../db/userRepository";
+import type { TeamStatusRepository } from "../db/teamStatusRepository";
 import {
   proposalsFromApi,
   pairingsFromApi,
@@ -11,6 +12,7 @@ import {
   type ApiMatch,
   type MatchLabels,
 } from "./footballData";
+import { knockoutLosers } from "./eliminations";
 import { recomputeStandings } from "./recompute";
 
 /** Orchestration error carrying the HTTP status the cron route should answer
@@ -31,6 +33,7 @@ export interface SyncDeps {
   standingsRepo: StandingsRepository;
   predRepo: PredictionRepository;
   userRepo: UserRepository;
+  teamStatusRepo: TeamStatusRepository;
   /** Injected so the route wires the football-data client and tests wire a stub. */
   fetchMatches: () => Promise<ApiMatch[]>;
   /** Defaults to now; injectable so `todayStatuses` is deterministic in tests. */
@@ -43,20 +46,29 @@ export interface SyncResult {
   results: string[];
   paired: string[];
   live: string[];
+  eliminated: string[];
   unmatched: string[];
   todayStatuses: string[];
 }
 
 /** Unattended results sync, free of any HTTP/auth concern so it can be unit
- *  tested with in-memory repositories. Three phases: (1) pair newly seeded
+ *  tested with in-memory repositories. Four phases: (1) pair newly seeded
  *  knockout slots with real teams, (2) apply new/corrected finished results
  *  and recompute standings only when something changed, (3) mirror in-play
- *  scores (which never affect scoring — matchOutcome requires 'finished').
+ *  scores (which never affect scoring — matchOutcome requires 'finished'),
+ *  (4) mark losers of decided knockout matches as eliminated.
  *
  *  `ok` is false when the api reports a finished match we cannot map; the
  *  route turns that into a non-200 so both cron callers alert on it. */
 export async function runResultsSync(deps: SyncDeps): Promise<SyncResult> {
-  const { fixtures, matchRepo, standingsRepo, predRepo, userRepo } = deps;
+  const {
+    fixtures,
+    matchRepo,
+    standingsRepo,
+    predRepo,
+    userRepo,
+    teamStatusRepo,
+  } = deps;
   const now = deps.now ?? new Date();
 
   const teamName = new Map(fixtures.teams.map((t) => [t.id, t.name]));
@@ -148,6 +160,18 @@ export async function runResultsSync(deps: SyncDeps): Promise<SyncResult> {
     });
   }
 
+  // Phase 4: knockout losers are out of every remaining bonus — mark them
+  // eliminated so "Kvar att hämta" stops counting picks on them. Admin can
+  // still resolve draws (penalty shoot-outs) and revive mistakes by hand.
+  if (fresh.length > 0) ourMatches = await matchRepo.all();
+  const alreadyOut = new Set(await teamStatusRepo.getEliminated());
+  const newlyOut = knockoutLosers(ourMatches).filter(
+    (id) => !alreadyOut.has(id),
+  );
+  for (const id of newlyOut) {
+    await teamStatusRepo.setEliminated(id, true);
+  }
+
   return {
     ok: unmatched.length === 0,
     applied: fresh.length,
@@ -156,6 +180,7 @@ export async function runResultsSync(deps: SyncDeps): Promise<SyncResult> {
     ),
     paired: pairings.map((p) => `${p.matchId}: ${p.homeName}-${p.awayName}`),
     live: liveUpdates.map((l) => `${l.matchId}: ${l.homeScore}-${l.awayScore}`),
+    eliminated: newlyOut,
     unmatched,
     todayStatuses,
   };
