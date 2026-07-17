@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { ClickableAvatar } from './ClickableAvatar';
 import { railFraction, magnetTopPercent, magnetLeftPercent } from '@/lib/view/barometer';
+import { MAX_POINTS } from '@/lib/domain/rules';
 import type { StandingView } from '@/lib/view/standingsView';
 
 export function RaceTrack({ standings }: { standings: StandingView[] }) {
@@ -26,7 +27,7 @@ export function RaceTrack({ standings }: { standings: StandingView[] }) {
 
   return (
     <div className="pitch">
-      <span className="goal-note">Mål = 168 p</span>
+      <span className="goal-note">Mål = {MAX_POINTS} p</span>
       {standings.map((s, i) => {
         const frac = ready ? railFraction(s.totalPoints) : 0;
         const lead = s.rank === 1;

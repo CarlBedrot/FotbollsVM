@@ -1,5 +1,6 @@
 import { RaceTrack } from './RaceTrack';
 import { RaceLanes } from './RaceLanes';
+import { MAX_POINTS } from '@/lib/domain/rules';
 import type { StandingView } from '@/lib/view/standingsView';
 
 export function RaceBarometer({ standings }: { standings: StandingView[] }) {
@@ -7,7 +8,7 @@ export function RaceBarometer({ standings }: { standings: StandingView[] }) {
     <section className="card hero">
       <div className="hero-head">
         <h2>Loppet</h2>
-        <div className="note">anfall mot 168!</div>
+        <div className="note">anfall mot {MAX_POINTS}!</div>
       </div>
       <div className="track">
         {standings.length === 0 && (
