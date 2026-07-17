@@ -1,5 +1,6 @@
 import { Card, SectionHeader } from './Card';
 import { Flag } from './Flag';
+import { RULES } from '@/lib/domain/rules';
 import type { GoalsFacit, GoalsFacitSide } from '@/lib/view/goalsFacit';
 
 function Row({ heading, side }: { heading: string; side: GoalsFacitSide }) {
@@ -22,7 +23,7 @@ function Row({ heading, side }: { heading: string; side: GoalsFacitSide }) {
 export function GoalsFacitCard({ facit }: { facit: GoalsFacit }) {
   return (
     <Card>
-      <SectionHeader title="Flest & färst mål" caption="Gruppspelets mål-facit — 4 poäng styck" />
+      <SectionHeader title="Flest & färst mål" caption={`Gruppspelets mål-facit — ${RULES.mostGoalsPoint} poäng styck`} />
       {!facit.complete ? (
         <p className="empty">Visas när gruppspelet är färdigspelat.</p>
       ) : (
