@@ -9,6 +9,7 @@ export interface RemainingRowCategory {
   teamName: string | null;
   alive: boolean;
   decided: boolean;
+  feasible: boolean;
   counts: boolean;
 }
 
@@ -49,6 +50,7 @@ function toRowCategory(c: RemainingCategory, teamName: (id: string) => string): 
     teamName: c.teamId ? teamName(c.teamId) : null,
     alive: c.alive,
     decided: c.decided,
+    feasible: c.feasible,
     counts: c.counts,
   };
 }

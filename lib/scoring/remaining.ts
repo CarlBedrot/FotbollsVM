@@ -26,7 +26,10 @@ export interface RemainingCategory {
   alive: boolean;
   /** The category's deciding match is already played. */
   decided: boolean;
-  /** Contributes to `reachable`: has a pick, still alive, not yet decided. */
+  /** The team can still win THIS category (a finalist can't take bronze; a
+   *  semifinal loser can't reach the final). */
+  feasible: boolean;
+  /** Contributes to `reachable`: has a pick, alive, feasible, not yet decided. */
   counts: boolean;
 }
 
@@ -72,21 +75,31 @@ export interface RemainingInput {
   predictions: RemainingPrediction[];
   eliminatedTeamIds: Iterable<string>;
   decided: DecidedFlags;
+  /** Teams headed to (or in) the final — they can no longer win bronze. */
+  finalistTeamIds?: Iterable<string>;
+  /** Semifinal losers — still alive for bronze, but out of finalist/champion. */
+  semifinalLoserIds?: Iterable<string>;
 }
 
 /**
  * Points each player can still gain, optimistic ceiling: every still-alive pick
- * is assumed to go all the way. A pick contributes only when its team is alive
- * and the category is not yet decided (avoids double-counting locked points).
+ * is assumed to go all the way. A pick contributes only when its team is alive,
+ * can still win that specific category, and the category is not yet decided
+ * (avoids double-counting locked points).
  */
 export function computeRemaining(input: RemainingInput): UserRemaining[] {
   const eliminated = new Set(input.eliminatedTeamIds);
+  const inFinal = new Set(input.finalistTeamIds ?? []);
+  const lostSemifinal = new Set(input.semifinalLoserIds ?? []);
   return input.predictions.map((p) => {
     const categories: RemainingCategory[] = CATEGORIES.map((c) => {
       const teamId = p.bonus[c.key] ?? null;
       const decided = input.decided[c.decidedKey];
       const alive = teamId !== null && !eliminated.has(teamId);
-      const counts = alive && !decided;
+      const feasible =
+        teamId === null ||
+        (c.key === "bronze" ? !inFinal.has(teamId) : !lostSemifinal.has(teamId));
+      const counts = alive && feasible && !decided;
       return {
         key: c.key,
         label: c.label,
@@ -94,6 +107,7 @@ export function computeRemaining(input: RemainingInput): UserRemaining[] {
         teamId,
         alive,
         decided,
+        feasible,
         counts,
       };
     });

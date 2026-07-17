@@ -5,6 +5,10 @@ function note(c: RemainingRowCategory): string {
   if (!c.teamName) return 'ingen tippning';
   if (c.decided) return `${c.teamName} · avgjord`;
   if (!c.alive) return `${c.teamName} · utslagen`;
+  if (!c.feasible) {
+    // Bronze pick that reached the final, or finalist/champion pick that lost its semifinal.
+    return c.key === 'bronze' ? `${c.teamName} · spelar final` : `${c.teamName} · förlorade semifinalen`;
+  }
   return `${c.teamName} · lever`;
 }
 

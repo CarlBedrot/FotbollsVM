@@ -82,6 +82,42 @@ describe("computeRemaining", () => {
     ).toBe(true);
   });
 
+  it("a bronze pick on a team headed to the final cannot count", () => {
+    const preds: RemainingPrediction[] = [
+      { userId: "a", bonus: { bronze: "ESP", champion: "ESP" } },
+    ];
+    const [r] = computeRemaining({
+      predictions: preds,
+      eliminatedTeamIds: [],
+      decided: NONE,
+      finalistTeamIds: ["ESP", "FRA"],
+    });
+    // ESP plays the final: bronze (8) impossible, champion (16) still open
+    expect(r.reachable).toBe(16);
+    const cats = byKey(r);
+    expect(cats.get("bronze")!.feasible).toBe(false);
+    expect(cats.get("bronze")!.alive).toBe(true);
+    expect(cats.get("champion")!.counts).toBe(true);
+  });
+
+  it("finalist/champion picks on a semifinal loser cannot count, but bronze can", () => {
+    const preds: RemainingPrediction[] = [
+      { userId: "a", bonus: { finalist_1: "BRA", champion: "BRA", bronze: "BRA" } },
+    ];
+    const [r] = computeRemaining({
+      predictions: preds,
+      eliminatedTeamIds: [],
+      decided: NONE,
+      semifinalLoserIds: ["BRA"],
+    });
+    // BRA lost its semifinal: finalist (8) and champion (16) gone, bronze (8) lives
+    expect(r.reachable).toBe(8);
+    const cats = byKey(r);
+    expect(cats.get("finalist_1")!.feasible).toBe(false);
+    expect(cats.get("champion")!.feasible).toBe(false);
+    expect(cats.get("bronze")!.counts).toBe(true);
+  });
+
   it("missing picks contribute nothing", () => {
     const [r] = computeRemaining({
       predictions: [{ userId: "a", bonus: {} }],
