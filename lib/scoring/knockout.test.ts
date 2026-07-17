@@ -1,6 +1,6 @@
 // lib/scoring/knockout.test.ts
 import { describe, it, expect } from 'vitest';
-import { finalists, champion, bronzeWinner, semifinalWinners, semifinalLosers } from './knockout';
+import { finalists, champion, bronzeWinner, semifinalWinners, semifinalLosers, bronzeContenders } from './knockout';
 import type { Match } from '../domain/types';
 
 function ko(id: string, stage: Match['stage'], home: string | null, away: string | null, status: Match['status'], hs: number | null, as: number | null): Match {
@@ -32,6 +32,10 @@ describe('knockout derivations', () => {
     ];
     expect(semifinalWinners(matches).sort()).toEqual(['A', 'D']);
     expect(semifinalLosers(matches).sort()).toEqual(['B', 'C']);
+  });
+  it('returns the bronze contenders once both teams are assigned', () => {
+    expect(bronzeContenders([ko('b', 'bronze', 'P', 'Q', 'scheduled', null, null)]).sort()).toEqual(['P', 'Q']);
+    expect(bronzeContenders([ko('b', 'bronze', 'P', null, 'scheduled', null, null)])).toEqual([]);
   });
   it('a drawn or unfinished semifinal yields neither winner nor loser', () => {
     expect(semifinalWinners([ko('sf1', 'sf', 'A', 'B', 'finished', 1, 1)])).toEqual([]);

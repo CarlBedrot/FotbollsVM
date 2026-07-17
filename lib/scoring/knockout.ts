@@ -20,6 +20,13 @@ export function finalists(matches: Match[]): string[] {
   return [final.homeTeamId, final.awayTeamId];
 }
 
+/** The two teams playing the bronze match (the semifinal losers), once assigned. */
+export function bronzeContenders(matches: Match[]): string[] {
+  const bronze = stageMatch('bronze', matches);
+  if (!bronze || !bronze.homeTeamId || !bronze.awayTeamId) return [];
+  return [bronze.homeTeamId, bronze.awayTeamId];
+}
+
 /** Winner of the final, once finished. */
 export function champion(matches: Match[]): string | null {
   return winnerOf(stageMatch('final', matches));

@@ -8,7 +8,7 @@ import {
 } from "../db/repository";
 import { mergeStandings, type StandingView } from "./standingsView";
 import { computeRemaining } from "../scoring/remaining";
-import { finalists, semifinalWinners, semifinalLosers } from "../scoring/knockout";
+import { finalists, semifinalWinners, semifinalLosers, bronzeContenders } from "../scoring/knockout";
 import {
   buildRemainingRows,
   decidedFromMatches,
@@ -164,9 +164,10 @@ export async function loadRemaining(): Promise<RemainingRow[]> {
     predictions: predictions.map((p) => ({ userId: p.userId, bonus: p.bonus })),
     eliminatedTeamIds: eliminated,
     decided: decidedFromMatches(matches),
-    // SF winners cover the gap before the final's teams are paired in the db.
+    // SF winners cover the gap before the final's teams are paired in the db;
+    // bronze-match pairings cover semifinals decided on penalties (drawn score).
     finalistTeamIds: [...finalists(matches), ...semifinalWinners(matches)],
-    semifinalLoserIds: semifinalLosers(matches),
+    semifinalLoserIds: [...semifinalLosers(matches), ...bronzeContenders(matches)],
   });
   const nameById = new Map(fixtures.teams.map((t) => [t.id, t.name]));
   return buildRemainingRows(
